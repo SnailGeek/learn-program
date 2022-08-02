@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="geek-auth" />
+        <module name="geek-principle" />
       </profile>
     </annotationProcessing>
   </component>
