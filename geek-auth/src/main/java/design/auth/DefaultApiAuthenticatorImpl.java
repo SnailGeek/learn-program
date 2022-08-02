@@ -39,5 +39,6 @@ public class DefaultApiAuthenticatorImpl implements ApiAuthencator {
         if (!serverAuthToken.match(clientAuthToken)) {
             throw new RuntimeException("Token verification failed");
         }
+        System.out.println("Token verification success!");
     }
 }

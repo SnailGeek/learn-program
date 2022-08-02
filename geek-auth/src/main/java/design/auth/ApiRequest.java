@@ -21,7 +21,7 @@ public class ApiRequest {
 
     public static ApiRequest buildFromUrl(String url) {
         final String[] reqArray = url.split("&");
-        final String originalUrl = reqArray[0].split("=", 2)[1];
+        final String originalUrl = reqArray[0];
         String appId = reqArray[1].split("=", 2)[1];
         String token = reqArray[2].split("=", 2)[1];
         long timestamp = Long.parseLong(reqArray[3].split("=", 2)[1]);
