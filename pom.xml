@@ -11,6 +11,7 @@
     <modules>
         <module>geek-auth</module>
         <module>geek-principle</module>
+        <module>lagou-mq</module>
     </modules>
 
     <properties>
