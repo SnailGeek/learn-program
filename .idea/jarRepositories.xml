@@ -57,14 +57,14 @@
       <option name="url" value="https://packages.glodon.com/artifactory/maven-scg-private" />
     </remote-repository>
     <remote-repository>
-      <option name="id" value="jboss.community" />
-      <option name="name" value="JBoss Community repository" />
-      <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
-    </remote-repository>
-    <remote-repository>
       <option name="id" value="gect" />
       <option name="name" value="maven-gect-private" />
       <option name="url" value="https://packages.glodon.com/artifactory/maven-gect-private" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="jboss.community" />
+      <option name="name" value="JBoss Community repository" />
+      <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="HuaweiCloudSDK" />
