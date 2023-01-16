@@ -10,6 +10,7 @@
         <module name="lagou-mq" />
         <module name="geek-auth" />
         <module name="geek-principle" />
+        <module name="lagou-transfer" />
       </profile>
     </annotationProcessing>
   </component>

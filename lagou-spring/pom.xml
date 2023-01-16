@@ -11,6 +11,10 @@
 
     <groupId>com.lagou.spring</groupId>
     <artifactId>lagou-spring</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>lagou-transfer</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

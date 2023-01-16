@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans>
+    <bean id="acountDao" class="com.lagou.edu.dao.impl.JdbcAccountDaoImpl "/>
+    <bean id="transferService" class="com.lagou.edu.service.impl.TransferServiceImpl2"/>
+</beans>
