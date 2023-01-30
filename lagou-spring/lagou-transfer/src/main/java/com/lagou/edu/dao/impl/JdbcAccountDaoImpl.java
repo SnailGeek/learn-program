@@ -48,7 +48,7 @@ public class JdbcAccountDaoImpl implements AccountDao {
 
         resultSet.close();
         preparedStatement.close();
-        //con.close();
+        con.close();
 
         return account;
     }
