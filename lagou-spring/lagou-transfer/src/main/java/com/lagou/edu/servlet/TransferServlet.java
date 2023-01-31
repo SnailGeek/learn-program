@@ -21,8 +21,8 @@ import java.io.IOException;
 public class TransferServlet extends HttpServlet {
 
     // 1. 实例化service层对象
-    private TransferService transferService = new TransferServiceImpl();
-//    private TransferService transferService = (TransferService) BeanFactory.getBean("transferService");
+//    private TransferService transferService = new TransferServiceImpl();
+    private TransferService transferService = (TransferService) BeanFactory.getBean("transferService");
 
     // 从工厂获取委托对象（委托对象是增强了事务控制的功能）
 

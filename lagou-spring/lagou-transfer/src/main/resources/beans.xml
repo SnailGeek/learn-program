@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <beans>
-    <bean id="acountDao" class="com.lagou.edu.dao.impl.JdbcAccountDaoImpl "/>
-    <bean id="transferService" class="com.lagou.edu.service.impl.TransferServiceImpl2"/>
+    <bean id="accountDao" class="com.lagou.edu.dao.impl.JdbcAccountDaoImpl"/>
+    <bean id="transferService" class="com.lagou.edu.service.impl.TransferServiceImpl">
+        <!-- set+name 之后锁定传值的set方法-->
+        <property name="AccountDao" ref="accountDao"/>
+    </bean>
 </beans>

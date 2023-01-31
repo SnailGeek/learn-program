@@ -7,11 +7,14 @@ import org.dom4j.io.SAXReader;
 
 import javax.xml.parsers.SAXParser;
 import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class BeanFactory {
+    // 使用document4j 和xpath表达式对xml文件进行解析
     private static Map<String, Object> map = new HashMap<>();
 
     static {
@@ -29,13 +32,31 @@ public class BeanFactory {
                 final Object o = aClass.newInstance();
                 map.put(id, o);
             }
-        } catch (DocumentException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (InstantiationException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
+
+            // 有property自元素的bean就有传值需求
+            final List<Element> propertyList = rootElement.selectNodes("//property");
+            for (Element element : propertyList) {
+                final String name = element.attributeValue("name");
+                final String ref = element.attributeValue("ref");
+
+                // 找到当前被需要处理依赖关系的bean
+                final Element parent = element.getParent();
+
+                // 调用父元素对象的反射功能
+                final String parentId = parent.attributeValue("id");
+                final Object parentObj = map.get(parentId);
+                // 遍历父对象中的所有方法
+                final Method[] methods = parentObj.getClass().getMethods();
+                for (Method method : methods) {
+                    if (method.getName().equals("set" + name)) {
+                        method.invoke(parentObj, map.get(ref));
+                    }
+                }
+                map.put(parentId, parentObj);
+            }
+
+        } catch (DocumentException | ClassNotFoundException | InstantiationException | IllegalAccessException |
+                 InvocationTargetException e) {
             throw new RuntimeException(e);
         }
 
