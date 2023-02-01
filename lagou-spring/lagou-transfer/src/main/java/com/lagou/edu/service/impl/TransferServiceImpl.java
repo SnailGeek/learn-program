@@ -4,6 +4,10 @@ import com.lagou.edu.dao.AccountDao;
 import com.lagou.edu.factory.BeanFactory;
 import com.lagou.edu.pojo.Account;
 import com.lagou.edu.service.TransferService;
+import com.lagou.edu.utils.ConnectionUtils;
+import com.lagou.edu.utils.TransactionManager;
+
+import java.sql.Connection;
 
 public class TransferServiceImpl implements TransferService {
 //    private AccountDao accountDao = new JdbcAccountDaoImpl();
@@ -20,13 +24,27 @@ public class TransferServiceImpl implements TransferService {
 
     @Override
     public void transfer(String fromCardNo, String toCardNo, int money) throws Exception {
-        final Account from = accountDao.queryAccountByCardNo(fromCardNo);
-        final Account to = accountDao.queryAccountByCardNo(toCardNo);
+        try {
+            // 开启事物
+            TransactionManager.getInstance().beginTransaction();
+            final Account from = accountDao.queryAccountByCardNo(fromCardNo);
+            final Account to = accountDao.queryAccountByCardNo(toCardNo);
 
-        from.setMoney(from.getMoney() - money);
-        to.setMoney(to.getMoney() + money);
+            from.setMoney(from.getMoney() - money);
+            to.setMoney(to.getMoney() + money);
 
-        accountDao.updateAccountByCardNo(from);
-        accountDao.updateAccountByCardNo(to);
+            accountDao.updateAccountByCardNo(from);
+            accountDao.updateAccountByCardNo(to);
+
+            // 提交事务
+            TransactionManager.getInstance().commit();
+        } catch (Exception e) {
+            // 回滚事务
+            TransactionManager.getInstance().rollback();
+            e.printStackTrace();
+            // 抛出异常便于Servlet异常捕获
+            throw e;
+
+        }
     }
 }
