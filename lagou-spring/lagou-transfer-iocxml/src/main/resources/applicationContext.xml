@@ -11,7 +11,7 @@
         <!-- set+name 之后锁定传值的set方法-->
         <property name="AccountDao" ref="accountDao"/>
     </bean>
-    <bean id="connectionUtils" class="com.lagou.edu.utils.ConnectionUtils"/>
+
 
     <!--事务-->
     <bean id="transactionManager" class="com.lagou.edu.utils.TransactionManager">
@@ -21,4 +21,17 @@
     <bean id="proxyFactory" class="com.lagou.edu.factory.ProxyFactory">
         <property name="TransactionManager" ref="transactionManager"/>
     </bean>
+
+    <!--    Spring Ioc实例化的三种方式-->
+    <!--    方式一：使用无参构造器（推荐）-->
+    <!--    <bean id="connectionUtils" class="com.lagou.edu.utils.ConnectionUtils"/>-->
+
+    <!--方式二：静态方法-->
+    <!--    <bean id="connectionUtils" class="com.lagou.edu.factory.CreateBeanFactory" factory-method="getInstanceStatic"/>-->
+
+    <!--    方式三：实例化方法-->
+    <bean id="createBeanFactory" class="com.lagou.edu.factory.CreateBeanFactory"/>
+    <bean id="connectionUtils" factory-bean="createBeanFactory" factory-method="getInstance"/>
+
+
 </beans>
