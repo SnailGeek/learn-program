@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <beans>
-    <bean id="accountDao" class="com.lagou.edu.dao.impl.JdbcAccountDaoImpl"/>
+    <bean id="accountDao" class="com.lagou.edu.dao.impl.JdbcAccountDaoImpl">
+        <property name="ConnectionUtils" ref="connectionUtils"/>
+    </bean>
     <bean id="transferService" class="com.lagou.edu.service.impl.TransferServiceImpl">
         <!-- set+name 之后锁定传值的set方法-->
         <property name="AccountDao" ref="accountDao"/>
+    </bean>
+    <bean id="connectionUtils" class="com.lagou.edu.utils.ConnectionUtils"/>
+
+    <!--事务-->
+    <bean id="transactionManager" class="com.lagou.edu.utils.TransactionManager">
+        <property name="ConnectionUtils" ref="connectionUtils"/>
+    </bean>
+
+    <bean id="proxyFactory" class="com.lagou.edu.factory.ProxyFactory">
+        <property name="TransactionManager" ref="transactionManager"/>
     </bean>
 </beans>

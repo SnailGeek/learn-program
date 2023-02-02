@@ -24,19 +24,22 @@ public class TransferServiceImpl implements TransferService {
 
     @Override
     public void transfer(String fromCardNo, String toCardNo, int money) throws Exception {
+/*
         try {
             // 开启事物
             TransactionManager.getInstance().beginTransaction();
-            final Account from = accountDao.queryAccountByCardNo(fromCardNo);
-            final Account to = accountDao.queryAccountByCardNo(toCardNo);
+*/
+        final Account from = accountDao.queryAccountByCardNo(fromCardNo);
+        final Account to = accountDao.queryAccountByCardNo(toCardNo);
 
-            from.setMoney(from.getMoney() - money);
-            to.setMoney(to.getMoney() + money);
+        from.setMoney(from.getMoney() - money);
+        to.setMoney(to.getMoney() + money);
 
-            accountDao.updateAccountByCardNo(from);
-            accountDao.updateAccountByCardNo(to);
+        accountDao.updateAccountByCardNo(from);
+        int i = 1 / 0;
+        accountDao.updateAccountByCardNo(to);
 
-            // 提交事务
+/*            // 提交事务
             TransactionManager.getInstance().commit();
         } catch (Exception e) {
             // 回滚事务
@@ -44,7 +47,6 @@ public class TransferServiceImpl implements TransferService {
             e.printStackTrace();
             // 抛出异常便于Servlet异常捕获
             throw e;
-
-        }
+        }*/
     }
 }

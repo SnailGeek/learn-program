@@ -13,11 +13,19 @@ import java.sql.ResultSet;
  * @author 应癫
  */
 public class JdbcAccountDaoImpl implements AccountDao {
+
+    private ConnectionUtils connectionUtils;
+
+    public void setConnectionUtils(ConnectionUtils connectionUtils) {
+        this.connectionUtils = connectionUtils;
+    }
+
     @Override
     public Account queryAccountByCardNo(String cardNo) throws Exception {
         //从连接池获取连接
 //        Connection con = DruidUtils.getInstance().getConnection();
-        final Connection con = ConnectionUtils.getInstance().getCurrentConnection();
+//        final Connection con = ConnectionUtils.getInstance().getCurrentConnection();
+        final Connection con = connectionUtils.getCurrentConnection();
         String sql = "select * from account where cardNo=?";
         PreparedStatement preparedStatement = con.prepareStatement(sql);
         preparedStatement.setString(1, cardNo);
@@ -38,7 +46,8 @@ public class JdbcAccountDaoImpl implements AccountDao {
     public int updateAccountByCardNo(Account account) throws Exception {
         //从连接池获取连接
 //        Connection con = DruidUtils.getInstance().getConnection();
-        final Connection con = ConnectionUtils.getInstance().getCurrentConnection();
+//        final Connection con = ConnectionUtils.getInstance().getCurrentConnection();
+        final Connection con = connectionUtils.getCurrentConnection();
         String sql = "update account set money=? where cardNo=?";
         PreparedStatement preparedStatement = con.prepareStatement(sql);
         preparedStatement.setInt(1, account.getMoney());
