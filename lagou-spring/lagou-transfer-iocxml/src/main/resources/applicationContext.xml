@@ -5,7 +5,51 @@
                 https://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="accountDao" class="com.lagou.edu.dao.impl.JdbcAccountDaoImpl" init-method="init" destroy-method="destroy">
-        <property name="ConnectionUtils" ref="connectionUtils"/>
+        <!--        set注入使用property标签，如果注入的是另外一个bean那么使用ref属性，如果注入的是普通值，那么使用的是value属性-->
+        <!--        <property name="ConnectionUtils" ref="connectionUtils"/>-->
+        <!--        <property name="name" value="jack"/>-->
+        <!--        <property name="sex" value="1"/>-->
+        <!--        <property name="money" value="100.3"/>-->
+
+        <!--        <constructor-arg index="0" ref="connectionUtils"/>-->
+        <!--        <constructor-arg index="1" value="jack"/>-->
+        <!--        <constructor-arg index="2" value="1"/>-->
+        <!--        <constructor-arg index="3" value="100.3"/>-->
+
+        <constructor-arg name="connectionUtils" ref="connectionUtils"/>
+        <constructor-arg name="name" value="jack"/>
+        <constructor-arg name="sex" value="1"/>
+        <constructor-arg name="money" value="100.3"/>
+
+        <property name="myArray">
+            <array>
+                <value>arry1</value>
+                <value>arry2</value>
+                <value>arry3</value>
+            </array>
+        </property>
+
+        <property name="myMap">
+            <map>
+                <entry key="key1" value="value1"/>
+                <entry key="key2" value="value2"/>
+            </map>
+        </property>
+
+        <property name="mySet">
+            <set>
+                <value>set1</value>
+                <value>set2</value>
+                <value>set3</value>
+            </set>
+        </property>
+
+        <property name="myProperties">
+            <props>
+                <prop key="prop1">value1</prop>
+                <prop key="prop2">value2</prop>
+            </props>
+        </property>
     </bean>
     <bean id="transferService" class="com.lagou.edu.service.impl.TransferServiceImpl">
         <!-- set+name 之后锁定传值的set方法-->
