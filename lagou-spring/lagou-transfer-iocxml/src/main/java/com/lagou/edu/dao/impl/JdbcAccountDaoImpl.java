@@ -14,6 +14,14 @@ import java.sql.ResultSet;
  */
 public class JdbcAccountDaoImpl implements AccountDao {
 
+    public void init() {
+        System.out.println("初始化方法。。。。");
+    }
+
+    public void destroy() {
+        System.out.println("销毁方法。。。。。");
+    }
+
     private ConnectionUtils connectionUtils;
 
     public void setConnectionUtils(ConnectionUtils connectionUtils) {

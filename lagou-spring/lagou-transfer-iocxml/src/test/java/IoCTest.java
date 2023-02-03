@@ -7,11 +7,16 @@ public class IoCTest {
     @Test
     public void testIoC() {
         // 通过读取classPath下的xml文件来启动容器
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
         AccountDao accountDao = (AccountDao) applicationContext.getBean("accountDao");
-        System.out.println(accountDao);
+        System.out.println("accountDao" + accountDao);
+
+        AccountDao accountDao1 = (AccountDao) applicationContext.getBean("accountDao");
+        System.out.println("accountDao1" + accountDao1);
 
         final Object connectionUtils = applicationContext.getBean("connectionUtils");
         System.out.println(connectionUtils);
+
+        applicationContext.close();
     }
 }

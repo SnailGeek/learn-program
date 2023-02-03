@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                 https://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="accountDao" class="com.lagou.edu.dao.impl.JdbcAccountDaoImpl">
+    <bean id="accountDao" class="com.lagou.edu.dao.impl.JdbcAccountDaoImpl" init-method="init" destroy-method="destroy">
         <property name="ConnectionUtils" ref="connectionUtils"/>
     </bean>
     <bean id="transferService" class="com.lagou.edu.service.impl.TransferServiceImpl">
