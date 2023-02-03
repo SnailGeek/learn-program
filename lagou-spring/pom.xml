@@ -15,6 +15,7 @@
     <modules>
         <module>lagou-transfer</module>
         <module>lagou-transfer-iocxml</module>
+        <module>lagou-transfer-ioc-xml-anno</module>
     </modules>
 
     <properties>

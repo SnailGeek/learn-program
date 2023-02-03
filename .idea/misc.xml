@@ -3,6 +3,7 @@
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/lagou-spring/lagou-transfer" />
+    <file type="web" url="file://$PROJECT_DIR$/lagou-spring/lagou-transfer-ioc-xml-anno" />
     <file type="web" url="file://$PROJECT_DIR$/lagou-spring/lagou-transfer-iocxml" />
   </component>
   <component name="MavenProjectsManager">
