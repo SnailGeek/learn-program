@@ -4,9 +4,11 @@ import com.lagou.edu.pojo.Account;
 import com.lagou.edu.utils.TransactionManager;
 import net.sf.cglib.proxy.InvocationHandler;
 import net.sf.cglib.proxy.Proxy;
+import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
 
+@Component("proxyFactory")
 public class ProxyFactory {
 
     private TransactionManager transactionManager;
