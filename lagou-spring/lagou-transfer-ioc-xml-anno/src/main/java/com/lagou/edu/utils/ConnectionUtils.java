@@ -1,5 +1,6 @@
 package com.lagou.edu.utils;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
@@ -8,20 +9,8 @@ import java.sql.SQLException;
 
 @Component("connectionUtils")
 public class ConnectionUtils {
-//    private ConnectionUtils() {
-//    }
-//
-//    private static ConnectionUtils connectionUtils = new ConnectionUtils();
-//
-//    public static ConnectionUtils getInstance() {
-//        return connectionUtils;
-//    }
-
+    @Autowired
     private DataSource dataSource;
-
-    public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
 
     private ThreadLocal<Connection> threadLocal = new ThreadLocal<>();
 

@@ -4,27 +4,15 @@ import com.lagou.edu.pojo.Account;
 import com.lagou.edu.utils.TransactionManager;
 import net.sf.cglib.proxy.InvocationHandler;
 import net.sf.cglib.proxy.Proxy;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
 
 @Component("proxyFactory")
 public class ProxyFactory {
-
+    @Autowired
     private TransactionManager transactionManager;
-
-    public void setTransactionManager(TransactionManager transactionManager) {
-        this.transactionManager = transactionManager;
-    }
-
-//    private ProxyFactory() {
-//    }
-//
-//    private static ProxyFactory proxyFactory = new ProxyFactory();
-//
-//    public static ProxyFactory getInstance() {
-//        return proxyFactory;
-//    }
 
     public Object getJDKProxy(Object obj) {
         return Proxy.newProxyInstance(obj.getClass().getClassLoader(), obj.getClass().getInterfaces(),
