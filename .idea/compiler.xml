@@ -9,6 +9,7 @@
         <module name="lagou-transfer-ioc-xml-anno" />
         <module name="lagou-transfer-iocxml" />
         <module name="lagou-transfer" />
+        <module name="lagou-transfer-ioc-anno" />
       </profile>
       <profile name="Annotation profile for learn-program" enabled="true">
         <sourceOutputDir name="../../target/generated-sources/annotations" />
