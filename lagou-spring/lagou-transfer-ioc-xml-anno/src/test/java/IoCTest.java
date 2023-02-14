@@ -1,4 +1,5 @@
 import com.lagou.edu.dao.AccountDao;
+import com.lagou.edu.service.TransferService;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -35,5 +36,12 @@ public class IoCTest {
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
         final Object companyFactoryBean = applicationContext.getBean("&companyFactoryBean");
         System.out.println(companyFactoryBean);
+    }
+
+    @Test
+    public void testAOP() throws Exception {
+        final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
+        final TransferService tra = context.getBean(TransferService.class);
+        tra.transfer("6029621011000", "6029621011001", 2);
     }
 }

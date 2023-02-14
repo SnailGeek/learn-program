@@ -19,6 +19,7 @@ public class TransferServiceImpl implements TransferService {
     @Override
     public void transfer(String fromCardNo, String toCardNo, int money) throws Exception {
 
+        System.out.println("业务逻辑执行中");
         final Account from = accountDao.queryAccountByCardNo(fromCardNo);
         final Account to = accountDao.queryAccountByCardNo(toCardNo);
 
