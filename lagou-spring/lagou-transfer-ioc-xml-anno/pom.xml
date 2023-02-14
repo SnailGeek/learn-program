@@ -52,6 +52,13 @@
             <scope>provided</scope>
         </dependency>
 
+        <!--java11中删除了一些注解-->
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+            <version>1.3.2</version>
+        </dependency>
+
         <!-- jackson依赖 -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>

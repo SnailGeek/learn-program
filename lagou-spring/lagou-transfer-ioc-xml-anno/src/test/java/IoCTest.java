@@ -19,4 +19,21 @@ public class IoCTest {
 
         applicationContext.close();
     }
+
+    @Test
+    public void testLazyInit() {
+        // 启动容器（容器初始化）
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
+        // getBean获取bean对象使用
+        final Object lazyResult = applicationContext.getBean("lazyResult");
+//        System.out.println(lazyResult);
+        applicationContext.close();
+    }
+
+    @Test
+    public void testFactoryBean() {
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
+        final Object companyFactoryBean = applicationContext.getBean("&companyFactoryBean");
+        System.out.println(companyFactoryBean);
+    }
 }
