@@ -31,18 +31,19 @@
 
 
     <!--进行aop相关的xml配置, 配置aop过程实际就是将aop术语落地-->
-    <bean id="logUtils" class="com.lagou.edu.utils.LogUtils"/>
-    <!--使用config标签表示开始aop配置，再内部配置切面aspect-->
-    <aop:config>
-        <aop:aspect id="logAspect" ref="logUtils">
-            <aop:pointcut id="pt1"
-                          expression="execution(public void com.lagou.edu.service.impl.TransferServiceImpl.transfer(java.lang.String,java.lang.String,int))"/>
-            <!--            <aop:before method="beforeMethod" pointcut-ref="pt1"/>-->
+    <!--    <bean id="logUtils" class="com.lagou.edu.utils.LogUtils"/>-->
+    <!--    &lt;!&ndash;使用config标签表示开始aop配置，再内部配置切面aspect&ndash;&gt;-->
+    <!--    <aop:config>-->
+    <!--        <aop:aspect id="logAspect" ref="logUtils">-->
+    <!--            <aop:pointcut id="pt1"-->
+    <!--                          expression="execution(* com.lagou.edu.service.impl.TransferServiceImpl.*(..))"/>-->
+    <!--            &lt;!&ndash;            <aop:before method="beforeMethod" pointcut-ref="pt1"/>&ndash;&gt;-->
 
-            <aop:around method="arroundMethod" pointcut-ref="pt1"/>
-        </aop:aspect>
+    <!--            <aop:around method="arroundMethod" pointcut-ref="pt1"/>-->
+    <!--        </aop:aspect>-->
+    <!--    </aop:config>-->
 
-    </aop:config>
-
+    <!--开启aop注解驱动, 纯注解模式，就在一个配置类上加@@EnableAspectJAutoProxy-->
+    <aop:aspectj-autoproxy/>
 
 </beans>

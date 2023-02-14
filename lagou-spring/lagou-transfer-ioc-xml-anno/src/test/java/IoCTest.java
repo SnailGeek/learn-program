@@ -39,7 +39,14 @@ public class IoCTest {
     }
 
     @Test
-    public void testAOP() throws Exception {
+    public void testAOPXml() throws Exception {
+        final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
+        final TransferService tra = context.getBean(TransferService.class);
+        tra.transfer("6029621011000", "6029621011001", 2);
+    }
+
+    @Test
+    public void testAOPAnno() throws Exception {
         final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
         final TransferService tra = context.getBean(TransferService.class);
         tra.transfer("6029621011000", "6029621011001", 2);
