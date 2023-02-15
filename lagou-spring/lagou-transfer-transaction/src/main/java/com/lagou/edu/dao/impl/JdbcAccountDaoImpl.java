@@ -38,6 +38,7 @@ public class JdbcAccountDaoImpl implements AccountDao {
     @Override
     public int updateAccountByCardNo(Account account) throws Exception {
         String sql = "update account set money=? where cardNo=?";
+        int servlet = 1 / 0;
         return jdbcTemplate.update(sql, account.getMoney(), account.getCardNo());
     }
 }
