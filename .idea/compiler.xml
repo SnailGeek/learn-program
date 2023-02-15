@@ -6,19 +6,15 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="lagou-transfer-ioc-xml-anno" />
-        <module name="lagou-transfer-iocxml" />
-        <module name="lagou-transfer" />
-        <module name="lagou-transfer-ioc-anno" />
-      </profile>
-      <profile name="Annotation profile for learn-program" enabled="true">
-        <sourceOutputDir name="../../target/generated-sources/annotations" />
-        <sourceTestOutputDir name="../../target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
         <module name="geek-design-pattern" />
-        <module name="lagou-mq" />
         <module name="geek-auth" />
         <module name="geek-principle" />
+        <module name="lagou-transfer-ioc-xml-anno" />
+        <module name="lagou-transfer-iocxml" />
+        <module name="lagou-mq" />
+        <module name="lagou-transfer" />
+        <module name="lagou-transfer-ioc-anno" />
+        <module name="lagou-transfer-transaction" />
       </profile>
     </annotationProcessing>
   </component>

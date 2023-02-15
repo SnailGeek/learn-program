@@ -6,6 +6,7 @@
     <file type="web" url="file://$PROJECT_DIR$/lagou-spring/lagou-transfer-ioc-anno" />
     <file type="web" url="file://$PROJECT_DIR$/lagou-spring/lagou-transfer-ioc-xml-anno" />
     <file type="web" url="file://$PROJECT_DIR$/lagou-spring/lagou-transfer-iocxml" />
+    <file type="web" url="file://$PROJECT_DIR$/lagou-spring/lagou-transfer-transaction" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
