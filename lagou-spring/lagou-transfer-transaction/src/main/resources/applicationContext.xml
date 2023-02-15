@@ -34,17 +34,19 @@
         <property name="dataSource" ref="datasource"/>
     </bean>
 
-    <tx:advice id="txAdvice" transaction-manager="transactionManager">
-        <tx:attributes>
-            <!--定义事务的细节-->
-            <tx:method name="*" read-only="false" isolation="DEFAULT" propagation="REQUIRED" timeout="-1"/>
-        </tx:attributes>
-    </tx:advice>
+    <!--    <tx:advice id="txAdvice" transaction-manager="transactionManager">-->
+    <!--        <tx:attributes>-->
+    <!--            &lt;!&ndash;定义事务的细节&ndash;&gt;-->
+    <!--            <tx:method name="*" read-only="false" isolation="DEFAULT" propagation="REQUIRED" timeout="-1"/>-->
+    <!--        </tx:attributes>-->
+    <!--    </tx:advice>-->
 
-    <aop:config>
-        <!--advice-ref指向增强=横切逻辑+方位-->
-        <aop:advisor advice-ref="txAdvice"
-                     pointcut="execution(* com.lagou.edu.service.impl.TransferServiceImpl.*(..))"/>
-    </aop:config>
+    <!--    <aop:config>-->
+    <!--        &lt;!&ndash;advice-ref指向增强=横切逻辑+方位&ndash;&gt;-->
+    <!--        <aop:advisor advice-ref="txAdvice"-->
+    <!--                     pointcut="execution(* com.lagou.edu.service.impl.TransferServiceImpl.*(..))"/>-->
+    <!--    </aop:config>-->
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>
 
 </beans>
