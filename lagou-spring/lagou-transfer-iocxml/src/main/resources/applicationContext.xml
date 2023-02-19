@@ -51,6 +51,7 @@
             </props>
         </property>
     </bean>
+
     <bean id="transferService" class="com.lagou.edu.service.impl.TransferServiceImpl">
         <!-- set+name 之后锁定传值的set方法-->
         <property name="AccountDao" ref="accountDao"/>
