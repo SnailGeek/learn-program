@@ -8,6 +8,10 @@
   <servlet>
     <servlet-name>lgoumvc</servlet-name>
     <servlet-class>com.lagou.edu.mvcframwork.servlet.LgDispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>springmvc.properties</param-value>
+    </init-param>
   </servlet>
   
   <servlet-mapping>
