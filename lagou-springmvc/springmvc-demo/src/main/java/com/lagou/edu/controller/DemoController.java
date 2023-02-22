@@ -1,9 +1,12 @@
 package com.lagou.edu.controller;
 
+import com.lagou.edu.pojo.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Date;
@@ -65,5 +68,14 @@ public class DemoController {
         map.put("date", date);
         System.out.println("===========Map" + map.getClass());
         return "success";
+    }
+
+    @RequestMapping("/handle07")
+    // 添加ResponseBody之后，可以返回对象或者字符串，不再走视图解析器，而是等同于response直接响应输出数据
+    @ResponseBody
+    public User handle07(@RequestBody User user) {
+        // user业务逻辑处理，修改name为张三丰
+        user.setName("Mr zhang");
+        return user;
     }
 }

@@ -48,5 +48,6 @@
         location：指定的静态资源的存放位置
     -->
     <mvc:resources mapping="/resources/**" location="classpath:/"/>
+    <mvc:resources mapping="/js/**" location="/WEB-INF/js/"/>
 
 </beans>
