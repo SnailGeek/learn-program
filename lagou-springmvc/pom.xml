@@ -14,6 +14,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>springmvc-demo</module>
+        <module>mvc</module>
     </modules>
 
     <properties>
