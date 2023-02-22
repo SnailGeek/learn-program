@@ -7,10 +7,16 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/demo")
@@ -77,5 +83,28 @@ public class DemoController {
         // user业务逻辑处理，修改name为张三丰
         user.setName("Mr zhang");
         return user;
+    }
+
+    @RequestMapping("/upload")
+    public ModelAndView upload(MultipartFile uploadFile, HttpSession session) throws IOException {
+        // 重命名
+        final String originalFilename = uploadFile.getOriginalFilename();
+        final String ext = originalFilename.substring(originalFilename.lastIndexOf('.') + 1);
+        String newName = UUID.randomUUID().toString() + "." + ext;
+
+        final String realPath = session.getServletContext().getRealPath("/uploads");
+        String datePath = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        File folder = new File(realPath + "/" + datePath);
+        if (!folder.exists()) {
+            folder.mkdirs();
+        }
+
+        uploadFile.transferTo(new File(folder, newName));
+
+        Date date = new Date();
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("date", date);
+        modelAndView.setViewName("success");
+        return modelAndView;
     }
 }
