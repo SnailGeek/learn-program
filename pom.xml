@@ -14,6 +14,7 @@
         <module>lagou-mq</module>
         <module>geek-design-pattern</module>
         <module>lagou-spring</module>
+        <module>lagou-springmvc</module>
     </modules>
 
     <properties>

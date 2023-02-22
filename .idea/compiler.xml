@@ -15,6 +15,7 @@
         <module name="lagou-transfer" />
         <module name="lagou-transfer-ioc-anno" />
         <module name="lagou-transfer-transaction" />
+        <module name="springmvc-demo" />
       </profile>
     </annotationProcessing>
   </component>
