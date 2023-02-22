@@ -57,8 +57,15 @@
             <!--配置当前拦截器的url拦截规则，**代表当前目录下及其子目录下的所有url-->
             <mvc:mapping path="/**"/>
             <!--在exclude-mapping基础上排除一些-->
-            <mvc:exclude-mapping path="/demo/**"/>
+            <!--<mvc:exclude-mapping path="/demo/**"/>-->
             <bean class="com.lagou.edu.interceptor.MyInterceptor01"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.lagou.edu.interceptor.MyInterceptor02"/>
         </mvc:interceptor>
     </mvc:interceptors>
 
