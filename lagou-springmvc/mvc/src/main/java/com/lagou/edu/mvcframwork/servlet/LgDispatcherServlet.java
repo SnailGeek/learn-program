@@ -5,6 +5,7 @@ import com.lagou.edu.mvcframwork.annotations.LgController;
 import com.lagou.edu.mvcframwork.annotations.LgRequestMapping;
 import com.lagou.edu.mvcframwork.annotations.LgService;
 import com.lagou.edu.mvcframwork.pojo.Handler;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -15,9 +16,12 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.*;
+import java.util.function.Predicate;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class LgDispatcherServlet extends HttpServlet {
@@ -36,16 +40,60 @@ public class LgDispatcherServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
+        // 处理请求：根据url，找到对应的method方法，进行调用
+        final Handler handler = getHandler(req);
+        if (handler == null) {
+            resp.getWriter().write("404 not found");
+        }
+
+        // 参数绑定
+        // 获取所有参数类型数组，数组就是我们最后要传入的args数组的长度
+        final Class<?>[] parameterTypes = handler.getMethod().getParameterTypes();
+        Object[] paraValues = new Object[parameterTypes.length];
+
+        // 以下是为了向参数数组塞值，而且要保证参数的顺序和方法中的形式参数保持一致
+        final Map<String, String[]> parameterMap = req.getParameterMap();
+        for (Map.Entry<String, String[]> param : parameterMap.entrySet()) {
+            final String value = StringUtils.join(param.getValue(), ",");
+
+            //参数和方法中的参数匹配 填充数据
+            if (!handler.getParamIndexMapping().containsKey(param.getKey())) {
+                continue;
+            }
+            final Integer index = handler.getParamIndexMapping().get(param.getKey());
+            paraValues[index] = value;
+        }
+        final Integer requestIndex = handler.getParamIndexMapping().get(HttpServletRequest.class.getSimpleName());
+        paraValues[requestIndex] = req;
+        final Integer responseIndex = handler.getParamIndexMapping().get(HttpServletResponse.class.getSimpleName());
+        paraValues[responseIndex] = resp;
+
+        try {
+            handler.getMethod().invoke(handler.getController(), paraValues);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        } catch (InvocationTargetException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // 处理请求：根据url，找到对应的method方法，进行调用
-        final String requestURI = req.getRequestURI();
-        final Method method = handlerMapping.get(requestURI);
-        method.invoke()
-        super.doPost(req, resp);
+
+    }
+
+    private Handler getHandler(HttpServletRequest req) {
+        if (handlerMapping.isEmpty()) {
+            return null;
+        }
+        final String url = req.getRequestURI();
+        for (Handler handler : handlerMapping) {
+            final Matcher matcher = handler.getPattern().matcher(url);
+            if (matcher.matches()) {
+                return handler;
+            }
+        }
+        return null;
     }
 
     @Override
@@ -102,7 +150,7 @@ public class LgDispatcherServlet extends HttpServlet {
                 final Parameter[] parameters = method.getParameters();
                 for (int i = 0; i < parameters.length; i++) {
                     final Parameter parameter = parameters[i];
-                    if (parameter.getType() == HttpServletRequest.class || parameter.getType() == HttpServletRequest.class) {
+                    if (parameter.getType() == HttpServletRequest.class || parameter.getType() == HttpServletResponse.class) {
                         // 如果是request和response对象，那么参数名称写HttpServletRequest和HttpServletResponse
                         handler.getParamIndexMapping().put(parameter.getType().getSimpleName(), i);
                     } else {
