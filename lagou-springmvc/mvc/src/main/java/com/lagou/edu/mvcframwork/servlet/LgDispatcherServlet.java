@@ -1,5 +1,8 @@
 package com.lagou.edu.mvcframwork.servlet;
 
+import com.lagou.edu.mvcframwork.annotations.LgController;
+import com.lagou.edu.mvcframwork.annotations.LgService;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -8,14 +11,21 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
+import java.io.ObjectStreamException;
+import java.util.*;
 
 public class LgDispatcherServlet extends HttpServlet {
     private Properties properties = new Properties();
 
+    /**
+     * 扫描的全限定类名
+     */
+    private List<String> classNames = new ArrayList<>();
+
+    private Map<String, Object> iocMap = new HashMap<>();
+
     @Override
+
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doGet(req, resp);
     }
@@ -56,15 +66,50 @@ public class LgDispatcherServlet extends HttpServlet {
 
     /**
      * IOC容器
+     * 基于classNames缓存的类的全限定类名，以及反射技术,完成对象创建和管理
      */
     private void doInstance() {
+        if (classNames.size() == 0) {
+            return;
+        }
+        try {
+            for (String className : classNames) {
+                final Class<?> aClass = Class.forName(className);
+                if (aClass.isAnnotationPresent(LgController.class)) {
+                    // controller的ID不做过多处理，取类名首字母小写
+                    final String simpleName = aClass.getSimpleName();
+                    final String lowerFirstSimpleName = lowerFirst(simpleName);
+                    final Object o = aClass.newInstance();
+                    iocMap.put(lowerFirstSimpleName, o);
+                } else if (aClass.isAnnotationPresent(LgService.class)) {
+                    final LgService annotation = aClass.getAnnotation(LgService.class);
+                    String beanName = annotation.value();
+                    if (!"".equals(beanName.trim())) {
+                        iocMap.put(beanName, aClass.newInstance());
+                    } else {
+                        beanName = lowerFirst(aClass.getSimpleName());
+                        iocMap.put(beanName, aClass.getNestHost());
+                    }
 
+                    final Class<?>[] interfaces = aClass.getInterfaces();
+                    for (Class<?> anInterface : interfaces) {
+                        iocMap.put(anInterface.getName(), aClass.newInstance());
+                    }
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    /**
-     * 扫描的全限定类名
-     */
-    private List<String> classNames = new ArrayList<>();
+    public String lowerFirst(String str) {
+        final char[] chars = str.toCharArray();
+        if ('A' <= chars[0] && chars[0] <= 'Z') {
+            chars[0] += 32;
+        }
+        return String.valueOf(chars);
+    }
+
 
     /**
      * 扫描类
