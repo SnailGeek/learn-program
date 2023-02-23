@@ -5,9 +5,16 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
 
 public class LgDispatcherServlet extends HttpServlet {
+    private Properties properties = new Properties();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doGet(req, resp);
@@ -24,7 +31,7 @@ public class LgDispatcherServlet extends HttpServlet {
         final String contextConfigLocation = config.getInitParameter("contextConfigLocation");
         doLoadConfig(contextConfigLocation);
         // 扫描相关的类，扫描注解
-        doScan("");
+        doScan(properties.getProperty("scanPackage"));
         // bean的初始化（实现IOC容器，基于注解）
         doInstance();
 
@@ -55,10 +62,25 @@ public class LgDispatcherServlet extends HttpServlet {
     }
 
     /**
+     * 扫描的全限定类名
+     */
+    private List<String> classNames = new ArrayList<>();
+
+    /**
      * 扫描类
      */
     private void doScan(String scanPackage) {
-
+        final String scanPackagePath = Thread.currentThread().getContextClassLoader().getResource("").getPath() + scanPackage.replaceAll("\\.", "/");
+        File pack = new File(scanPackagePath);
+        final File[] files = pack.listFiles();
+        for (File file : files) {
+            if (file.isDirectory()) {
+                doScan(scanPackage + "." + file.getName());
+            } else if (file.getName().endsWith(".class")) {
+                final String className = scanPackage + "." + file.getName().replaceAll(".class", "");
+                classNames.add(className);
+            }
+        }
     }
 
     /**
@@ -67,6 +89,11 @@ public class LgDispatcherServlet extends HttpServlet {
      * @param contextConfigLocation
      */
     private void doLoadConfig(String contextConfigLocation) {
-
+        final InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream(contextConfigLocation);
+        try {
+            properties.load(resourceAsStream);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
