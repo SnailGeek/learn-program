@@ -1,6 +1,8 @@
 package com.lagou.edu.mvcframwork.servlet;
 
+import com.lagou.edu.mvcframwork.annotations.LgAutowired;
 import com.lagou.edu.mvcframwork.annotations.LgController;
+import com.lagou.edu.mvcframwork.annotations.LgRequestMapping;
 import com.lagou.edu.mvcframwork.annotations.LgService;
 
 import javax.servlet.ServletConfig;
@@ -11,7 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.ObjectStreamException;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.*;
 
 public class LgDispatcherServlet extends HttpServlet {
@@ -22,10 +25,11 @@ public class LgDispatcherServlet extends HttpServlet {
      */
     private List<String> classNames = new ArrayList<>();
 
-    private Map<String, Object> iocMap = new HashMap<>();
+    private Map<String, Object> ioc = new HashMap<>();
+
+    private Map<String, Method> handlerMapping = new HashMap<>();
 
     @Override
-
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doGet(req, resp);
     }
@@ -58,10 +62,63 @@ public class LgDispatcherServlet extends HttpServlet {
         super.init(config);
     }
 
+    /**
+     * 构造一个HandleMapping处理映射器
+     * 将url和method建立一个关联
+     */
     private void initHandlerMapping() {
+        if (ioc.isEmpty()) {
+            return;
+        }
+        for (Map.Entry<String, Object> entry : ioc.entrySet()) {
+            final Class<?> aClass = entry.getValue().getClass();
+            if (!aClass.isAnnotationPresent(LgController.class)) {
+                continue;
+            }
+            String baseUrl = "";
+            if (aClass.isAnnotationPresent(LgRequestMapping.class)) {
+                final LgRequestMapping annotation = aClass.getAnnotation(LgRequestMapping.class);
+                baseUrl = annotation.value();
+            }
+
+            for (Method method : aClass.getMethods()) {
+                if (!method.isAnnotationPresent(LgRequestMapping.class)) {
+                    continue;
+                }
+                final LgRequestMapping annotation = method.getAnnotation(LgRequestMapping.class);
+                final String methodUrl = annotation.value();
+                final String url = baseUrl + methodUrl;
+                handlerMapping.put(url, method);
+            }
+
+        }
     }
 
     private void doAutowried() {
+        if (ioc.isEmpty()) {
+            return;
+        }
+        // 遍历ioc对象，查看ioc对象的字段，是否含有LgAutowried注解
+        for (Map.Entry<String, Object> entry : ioc.entrySet()) {
+            final Field[] fields = entry.getValue().getClass().getDeclaredFields();
+            for (Field field : fields) {
+                if (!field.isAnnotationPresent(LgAutowired.class)) {
+                    continue;
+                }
+                final LgAutowired annotation = field.getAnnotation(LgAutowired.class);
+                String beanName = annotation.value();
+                if ("".equals(beanName.trim())) {
+                    //根据当前字段类型注入
+                    beanName = lowerFirst(field.getType().getName());
+                }
+                field.setAccessible(true);
+                try {
+                    field.set(entry.getValue(), ioc.get(beanName));
+                } catch (IllegalAccessException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
     }
 
     /**
@@ -80,20 +137,20 @@ public class LgDispatcherServlet extends HttpServlet {
                     final String simpleName = aClass.getSimpleName();
                     final String lowerFirstSimpleName = lowerFirst(simpleName);
                     final Object o = aClass.newInstance();
-                    iocMap.put(lowerFirstSimpleName, o);
+                    ioc.put(lowerFirstSimpleName, o);
                 } else if (aClass.isAnnotationPresent(LgService.class)) {
                     final LgService annotation = aClass.getAnnotation(LgService.class);
                     String beanName = annotation.value();
                     if (!"".equals(beanName.trim())) {
-                        iocMap.put(beanName, aClass.newInstance());
+                        ioc.put(beanName, aClass.newInstance());
                     } else {
                         beanName = lowerFirst(aClass.getSimpleName());
-                        iocMap.put(beanName, aClass.getNestHost());
+                        ioc.put(beanName, aClass.getNestHost());
                     }
 
                     final Class<?>[] interfaces = aClass.getInterfaces();
                     for (Class<?> anInterface : interfaces) {
-                        iocMap.put(anInterface.getName(), aClass.newInstance());
+                        ioc.put(anInterface.getName(), aClass.newInstance());
                     }
                 }
             }

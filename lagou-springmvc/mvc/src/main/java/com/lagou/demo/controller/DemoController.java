@@ -15,6 +15,7 @@ public class DemoController {
     @LgAutowired
     private IDemoSerivce demoSerivce;
 
+    @LgRequestMapping("/query")
     public String query(HttpServletRequest request, HttpServletResponse response, String name) {
         return demoSerivce.get(name);
     }
