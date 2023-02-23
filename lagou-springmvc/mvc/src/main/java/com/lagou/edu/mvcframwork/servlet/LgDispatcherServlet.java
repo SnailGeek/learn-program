@@ -4,6 +4,7 @@ import com.lagou.edu.mvcframwork.annotations.LgAutowired;
 import com.lagou.edu.mvcframwork.annotations.LgController;
 import com.lagou.edu.mvcframwork.annotations.LgRequestMapping;
 import com.lagou.edu.mvcframwork.annotations.LgService;
+import com.lagou.edu.mvcframwork.pojo.Handler;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -15,7 +16,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 import java.util.*;
+import java.util.regex.Pattern;
 
 public class LgDispatcherServlet extends HttpServlet {
     private Properties properties = new Properties();
@@ -27,7 +30,9 @@ public class LgDispatcherServlet extends HttpServlet {
 
     private Map<String, Object> ioc = new HashMap<>();
 
-    private Map<String, Method> handlerMapping = new HashMap<>();
+//    private Map<String, Handler> handlerMapping = new HashMap<>();
+
+    private List<Handler> handlerMapping = new ArrayList<>();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -36,6 +41,10 @@ public class LgDispatcherServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // 处理请求：根据url，找到对应的method方法，进行调用
+        final String requestURI = req.getRequestURI();
+        final Method method = handlerMapping.get(requestURI);
+        method.invoke()
         super.doPost(req, resp);
     }
 
@@ -88,7 +97,19 @@ public class LgDispatcherServlet extends HttpServlet {
                 final LgRequestMapping annotation = method.getAnnotation(LgRequestMapping.class);
                 final String methodUrl = annotation.value();
                 final String url = baseUrl + methodUrl;
-                handlerMapping.put(url, method);
+                Handler handler = new Handler(entry.getValue(), method, Pattern.compile(url));
+                // 计算方法的参数位置信息
+                final Parameter[] parameters = method.getParameters();
+                for (int i = 0; i < parameters.length; i++) {
+                    final Parameter parameter = parameters[i];
+                    if (parameter.getType() == HttpServletRequest.class || parameter.getType() == HttpServletRequest.class) {
+                        // 如果是request和response对象，那么参数名称写HttpServletRequest和HttpServletResponse
+                        handler.getParamIndexMapping().put(parameter.getType().getSimpleName(), i);
+                    } else {
+                        handler.getParamIndexMapping().put(parameter.getName(), i);
+                    }
+                }
+                handlerMapping.add(handler);
             }
 
         }
