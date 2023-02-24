@@ -15,6 +15,7 @@
     <modules>
         <module>springmvc-demo</module>
         <module>mvc</module>
+        <module>ssm</module>
     </modules>
 
     <properties>

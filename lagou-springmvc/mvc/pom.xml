@@ -40,7 +40,7 @@
                     <source>11</source>
                     <target>11</target>
                     <encoding>utf-8</encoding>
-                    <!--告诉编译器，编译器的时候记录下星灿的真实名称-->
+                    <!--告诉编译器，编译器的时候记录下形参的真实名称-->
                     <compilerArgs>
                         <arg>-parameters</arg>
                     </compilerArgs>

@@ -9,6 +9,7 @@
     <file type="web" url="file://$PROJECT_DIR$/lagou-spring/lagou-transfer-transaction" />
     <file type="web" url="file://$PROJECT_DIR$/lagou-springmvc/mvc" />
     <file type="web" url="file://$PROJECT_DIR$/lagou-springmvc/springmvc-demo" />
+    <file type="web" url="file://$PROJECT_DIR$/lagou-springmvc/ssm" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
