@@ -10,7 +10,7 @@
                              http://www.springframework.org/schema/tx
                              http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <context:component-scan base-package="com.lagou.edu"/>
+    <context:component-scan base-package="com.lagou.edu.mapper"/>
 
     <context:property-placeholder location="classpath:jdbc.properties"/>
 
@@ -19,10 +19,6 @@
         <property name="url" value="${jdbc.url}"/>
         <property name="username" value="${jdbc.username}"/>
         <property name="password" value="${jdbc.password}"/>
-    </bean>
-
-    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource"/>
     </bean>
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
