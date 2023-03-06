@@ -7,9 +7,10 @@
         http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
-        https://www.springframework.org/schema/beans/spring-context.xsd
+        https://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/data/jpa
-        https://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+        https://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+">
 
     <!--1. 数据库连接池配置-->
     <context:property-placeholder location="classpath:jdbc.properties"/>
