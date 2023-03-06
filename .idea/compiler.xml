@@ -6,18 +6,19 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="geek-design-pattern" />
+        <module name="spring-data-jpa" />
         <module name="geek-auth" />
-        <module name="geek-principle" />
-        <module name="lagou-transfer-ioc-xml-anno" />
         <module name="lagou-transfer-iocxml" />
         <module name="lagou-mq" />
         <module name="lagou-transfer" />
-        <module name="lagou-transfer-ioc-anno" />
-        <module name="mvc" />
         <module name="ssm" />
         <module name="lagou-transfer-transaction" />
         <module name="springmvc-demo" />
+        <module name="geek-design-pattern" />
+        <module name="geek-principle" />
+        <module name="lagou-transfer-ioc-xml-anno" />
+        <module name="lagou-transfer-ioc-anno" />
+        <module name="mvc" />
       </profile>
     </annotationProcessing>
   </component>

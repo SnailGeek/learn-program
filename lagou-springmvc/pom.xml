@@ -16,6 +16,7 @@
         <module>springmvc-demo</module>
         <module>mvc</module>
         <module>ssm</module>
+        <module>spring-data-jpa</module>
     </modules>
 
     <properties>
