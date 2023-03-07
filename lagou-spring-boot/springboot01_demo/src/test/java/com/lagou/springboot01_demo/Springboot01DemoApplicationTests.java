@@ -1,6 +1,7 @@
 package com.lagou.springboot01_demo;
 
 import com.lagou.controller.HelloController;
+import com.lagou.pojo.MyProperties;
 import com.lagou.pojo.Person;
 import com.lagou.pojo.Student;
 import org.junit.jupiter.api.Test;
@@ -37,5 +38,13 @@ class Springboot01DemoApplicationTests {
     @Test
     void valueTest() {
         System.out.println(student);
+    }
+
+    @Autowired
+    private MyProperties myProperties;
+
+    @Test
+    void propertySourceTest() {
+        System.out.println(myProperties);
     }
 }
