@@ -7,6 +7,7 @@ import com.lagou.pojo.Student;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
@@ -57,4 +58,13 @@ class Springboot01DemoApplicationTests {
     void configurationIocTest() {
         System.out.println(context.containsBean("iservice"));
     }
+
+    @Value("${tom.description}")
+    private String description;
+
+    @Test
+    void placeholderDescription() {
+        System.out.println(description);
+    }
+
 }
