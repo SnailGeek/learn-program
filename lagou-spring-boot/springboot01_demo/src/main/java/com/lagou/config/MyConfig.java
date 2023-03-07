@@ -1,0 +1,12 @@
+package com.lagou.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class MyConfig {
+    @Bean(name = "iservice") //将返回值对象作为组件添加到spring容器中，标识id默认是方法名
+    public MyService myService() {
+        return new MyService();
+    }
+}

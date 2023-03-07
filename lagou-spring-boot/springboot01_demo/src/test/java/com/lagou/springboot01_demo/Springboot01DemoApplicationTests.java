@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class) //测试启动器，并加载spring boot测试注解
@@ -35,6 +36,7 @@ class Springboot01DemoApplicationTests {
 
     @Autowired
     private Student student;
+
     @Test
     void valueTest() {
         System.out.println(student);
@@ -46,5 +48,13 @@ class Springboot01DemoApplicationTests {
     @Test
     void propertySourceTest() {
         System.out.println(myProperties);
+    }
+
+    @Autowired
+    private ApplicationContext context;
+
+    @Test
+    void configurationIocTest() {
+        System.out.println(context.containsBean("iservice"));
     }
 }
