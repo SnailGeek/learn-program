@@ -16,15 +16,18 @@
         <module name="springmvc-demo" />
         <module name="geek-design-pattern" />
         <module name="geek-principle" />
+        <module name="lagou-spring-boot" />
         <module name="lagou-transfer-ioc-xml-anno" />
         <module name="lagou-transfer-ioc-anno" />
         <module name="mvc" />
+        <module name="springboot01_demo" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="mvc" options="-parameters" />
+      <module name="springboot01_demo" options="-parameters" />
     </option>
   </component>
 </project>

@@ -15,6 +15,7 @@
         <module>geek-design-pattern</module>
         <module>lagou-spring</module>
         <module>lagou-springmvc</module>
+        <module>lagou-spring-boot</module>
     </modules>
 
     <properties>

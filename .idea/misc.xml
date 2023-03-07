@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/lagou-spring-boot/springboot01_demo" />
     <file type="web" url="file://$PROJECT_DIR$/lagou-spring/lagou-transfer" />
     <file type="web" url="file://$PROJECT_DIR$/lagou-spring/lagou-transfer-ioc-anno" />
     <file type="web" url="file://$PROJECT_DIR$/lagou-spring/lagou-transfer-ioc-xml-anno" />
@@ -15,6 +16,7 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/lagou-spring-boot/springboot01_demo/pom.xml" />
       </list>
     </option>
   </component>
