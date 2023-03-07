@@ -2,6 +2,7 @@ package com.lagou.springboot01_demo;
 
 import com.lagou.controller.HelloController;
 import com.lagou.pojo.Person;
+import com.lagou.pojo.Student;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,4 +31,11 @@ class Springboot01DemoApplicationTests {
         System.out.println(person);
     }
 
+
+    @Autowired
+    private Student student;
+    @Test
+    void valueTest() {
+        System.out.println(student);
+    }
 }

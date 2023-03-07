@@ -1,0 +1,9 @@
+server:
+  port: 8081
+person:
+  id: 1
+  name: tom
+  hobby: [ code,sleep ]
+  family: [ father,mother ]
+  map: { k1: v1,K2: v2 }
+  pet: { type: dog,name: lucy }
