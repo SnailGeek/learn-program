@@ -1,4 +1,4 @@
-package com.lagou.springboot01_demo;
+package com.lagou;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
