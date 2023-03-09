@@ -16,11 +16,11 @@
         <module name="springmvc-demo" />
         <module name="geek-design-pattern" />
         <module name="geek-principle" />
-        <module name="lagou-spring-boot" />
         <module name="lagou-transfer-ioc-xml-anno" />
         <module name="lagou-transfer-ioc-anno" />
         <module name="mvc" />
         <module name="springboot01_demo" />
+        <module name="zdy-spring-booot-starter" />
       </profile>
     </annotationProcessing>
   </component>

@@ -3,6 +3,7 @@ package com.lagou.springboot01_demo;
 import com.lagou.controller.HelloController;
 import com.lagou.pojo.MyProperties;
 import com.lagou.pojo.Person;
+import com.lagou.pojo.SimpleBean;
 import com.lagou.pojo.Student;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -67,4 +68,12 @@ class Springboot01DemoApplicationTests {
         System.out.println(description);
     }
 
+    /*测试自定义starter*/
+    @Autowired
+    private SimpleBean simpleBean;
+
+    @Test
+    public void zdyStarterTest() {
+        System.out.println(simpleBean);
+    }
 }
