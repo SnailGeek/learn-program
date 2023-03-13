@@ -17,6 +17,7 @@
         <module name="springmvc-demo" />
         <module name="geek-design-pattern" />
         <module name="geek-principle" />
+        <module name="my-spring-mvc" />
         <module name="lagou-transfer-ioc-xml-anno" />
         <module name="lagou-transfer-ioc-anno" />
         <module name="mvc" />
