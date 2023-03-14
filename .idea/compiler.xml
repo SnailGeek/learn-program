@@ -12,6 +12,7 @@
         <module name="lagou-transfer-iocxml" />
         <module name="lagou-transfer" />
         <module name="ssm" />
+        <module name="webflux3_1" />
         <module name="lagou-transfer-transaction" />
         <module name="security-demo" />
         <module name="springmvc-demo" />

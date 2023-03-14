@@ -17,6 +17,7 @@
         <module>lagou-springmvc</module>
         <module>lagou-spring-boot</module>
         <module>my-spring</module>
+        <module>lagou-spring-webflux</module>
     </modules>
 
     <properties>
