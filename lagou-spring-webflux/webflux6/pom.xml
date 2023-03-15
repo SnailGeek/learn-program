@@ -4,18 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.geek.design</groupId>
-        <artifactId>learn-program</artifactId>
+        <groupId>com.lagou.webflux</groupId>
+        <artifactId>lagou-spring-webflux</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.lagou.webflux</groupId>
-    <artifactId>lagou-spring-webflux</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>webflux3_1</module>
-        <module>webflux6</module>
-    </modules>
+    <artifactId>webflux6</artifactId>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
