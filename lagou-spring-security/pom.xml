@@ -10,7 +10,7 @@
 	</parent>
 	<packaging>pom</packaging>
 	<groupId>com.lagou</groupId>
-	<artifactId>lagout-spring-security</artifactId>
+	<artifactId>lagou-spring-security</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>lagout-spring-security</name>
 	<description>lagout-spring-security</description>
