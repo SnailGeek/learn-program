@@ -3,6 +3,7 @@
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/lagou-spring-boot/springboot01_demo" />
+    <file type="web" url="file://$PROJECT_DIR$/lagou-spring-security" />
     <file type="web" url="file://$PROJECT_DIR$/lagou-spring/lagou-transfer" />
     <file type="web" url="file://$PROJECT_DIR$/lagou-spring/lagou-transfer-ioc-anno" />
     <file type="web" url="file://$PROJECT_DIR$/lagou-spring/lagou-transfer-ioc-xml-anno" />
@@ -11,7 +12,6 @@
     <file type="web" url="file://$PROJECT_DIR$/lagou-springmvc/mvc" />
     <file type="web" url="file://$PROJECT_DIR$/lagou-springmvc/springmvc-demo" />
     <file type="web" url="file://$PROJECT_DIR$/lagou-springmvc/ssm" />
-    <file type="web" url="file://$PROJECT_DIR$/lagout-spring-security" />
     <file type="web" url="file://$PROJECT_DIR$/my-spring/my-spring-mvc" />
   </component>
   <component name="MavenProjectsManager">

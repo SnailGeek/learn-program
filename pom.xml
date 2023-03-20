@@ -18,6 +18,7 @@
         <module>lagou-spring-boot</module>
         <module>my-spring</module>
         <module>lagou-spring-webflux</module>
+        <module>lagou-tomcat</module>
     </modules>
 
     <properties>

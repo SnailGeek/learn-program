@@ -12,9 +12,9 @@
         <module name="lagou-transfer-iocxml" />
         <module name="lagou-transfer" />
         <module name="ssm" />
+        <module name="minicat" />
         <module name="webflux3_1" />
         <module name="lagou-transfer-transaction" />
-        <module name="security-demo" />
         <module name="springmvc-demo" />
         <module name="geek-design-pattern" />
         <module name="geek-principle" />
@@ -27,10 +27,14 @@
         <module name="zdy-spring-booot-starter" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="lagou-spring-security" target="11" />
+      <module name="security-demo" target="11" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="lagout-spring-security" options="" />
+      <module name="lagou-spring-security" options="" />
       <module name="mvc" options="-parameters" />
       <module name="security-demo" options="-parameters" />
       <module name="springboot01_demo" options="-parameters" />
