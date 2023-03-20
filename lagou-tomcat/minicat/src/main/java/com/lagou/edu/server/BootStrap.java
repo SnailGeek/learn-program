@@ -16,6 +16,7 @@ import java.net.Socket;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.*;
 
 /**
  * Minicat主类
@@ -66,8 +67,15 @@ public class BootStrap {
 //        }
 
         // 加载解析相关的配置 web.xml
-
         loadServlet();
+        int corePoolSize = 10;
+        int maximumPoolSize = 50;
+        long keepAliveTime = 100L;
+        TimeUnit unit = TimeUnit.SECONDS;
+        BlockingQueue<Runnable> workQueue = new ArrayBlockingQueue<>(50);
+        ThreadFactory threadFactory = Executors.defaultThreadFactory();
+        RejectedExecutionHandler handler = new ThreadPoolExecutor.AbortPolicy();
+        final ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue, threadFactory, handler);
 
         /*
          * MiniCat3.0版本
@@ -89,10 +97,21 @@ public class BootStrap {
 //            sock.close();
 //        }
 
+        /*
+         *多线程改造
+         * */
+//        while (true) {
+//            final Socket sock = serverSocket.accept();
+//            final RequestProcessor requestProcessor = new RequestProcessor(sock, servletMap);
+//            requestProcessor.start();
+//        }
+        // 使用线程池
         while (true) {
+            System.out.println("======>>线程池进行多线程改造");
             final Socket sock = serverSocket.accept();
             final RequestProcessor requestProcessor = new RequestProcessor(sock, servletMap);
-            requestProcessor.start();
+            //requestProcessor.start();
+            threadPoolExecutor.execute(requestProcessor);
         }
     }
 
@@ -131,6 +150,7 @@ public class BootStrap {
             throw new RuntimeException(e);
         }
     }
+
 
     /**
      * miniCat 的程序启动入口
