@@ -73,22 +73,27 @@ public class BootStrap {
          * MiniCat3.0版本
          * 请求动态资源
          */
+//        while (true) {
+//            final Socket sock = serverSocket.accept();
+//            final InputStream inputStream = sock.getInputStream();
+//            // 封装Request
+//            final Request request = new Request(inputStream);
+//            final Response response = new Response(sock.getOutputStream());
+//
+//            final HttpServlet httpServlet = servletMap.get(request.getUrl());
+//            if (httpServlet == null) {
+//                response.outputHtml(request.getUrl());
+//            } else {
+//                httpServlet.service(request, response);
+//            }
+//            sock.close();
+//        }
+
         while (true) {
             final Socket sock = serverSocket.accept();
-            final InputStream inputStream = sock.getInputStream();
-            // 封装Request
-            final Request request = new Request(inputStream);
-            final Response response = new Response(sock.getOutputStream());
-
-            final HttpServlet httpServlet = servletMap.get(request.getUrl());
-            if (httpServlet == null) {
-                response.outputHtml(request.getUrl());
-            } else {
-                httpServlet.service(request, response);
-            }
-            sock.close();
+            final RequestProcessor requestProcessor = new RequestProcessor(sock, servletMap);
+            requestProcessor.start();
         }
-
     }
 
     private Map<String, HttpServlet> servletMap = new HashMap<>();

@@ -7,8 +7,11 @@ public class LagouServlet extends HttpServlet {
     public void doGet(Request request, Response response) {
         String content = "<h1>LagouServlet get</h1>";
         try {
+            Thread.sleep(1000000);
             response.output(HttpProtocolUtil.getHttpHeader200(content.getBytes().length) + content);
         } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
