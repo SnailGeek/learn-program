@@ -28,6 +28,8 @@ public class BootStrap {
      */
     private int port = 8080;
 
+    private Map<String, HttpServlet> servletMap = new HashMap<>();
+
     public int getPort() {
         return port;
     }
@@ -115,7 +117,7 @@ public class BootStrap {
         }
     }
 
-    private Map<String, HttpServlet> servletMap = new HashMap<>();
+
 
     /**
      * 加载解析web.xml 初始化Servlet
