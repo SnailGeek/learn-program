@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation=
+               "http://www.springframework.org/schema/beans
+                http://www.springframework.org/schema/beans/spring-beans.xsd
+                http://www.springframework.org/schema/context
+                http://www.springframework.org/schema/context/spring-context.xsd
+                http://www.springframework.org/schema/mvc
+                http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <!--mvc自动注册一些组件配置-->
+    <mvc:annotation-driven/>
+    <!--通过扫描注释配置类，如果使用了spring可以通过context:inlude-filter子标签来扫描@Controller就可以了-->
+    <context:component-scan base-package="com.snail.learn"/>
+
+    <!--    <context:component-scan base-package="com.snail.learn" use-default-filters="false">-->
+    <!--        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>-->
+    <!--    </context:component-scan>-->
+
+    <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
+    <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>
+    <!--配置视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <!--查找视图页面的前缀和后缀，比如传进来的逻辑视图名为hello，则该jsp视图页面应该放在/WEB-INF/jsp/hello.jsp-->
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <bean name="/hello" class="com.snail.learn.kaitao.controller.HelloWorldController"/>
+
+</beans>
