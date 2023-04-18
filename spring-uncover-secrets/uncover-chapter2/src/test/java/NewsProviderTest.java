@@ -7,6 +7,7 @@ import org.springframework.beans.PropertyValue;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.config.ConstructorArgumentValues;
 import org.springframework.beans.factory.support.*;
+import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
@@ -83,5 +84,12 @@ public class NewsProviderTest {
         final PropertiesBeanDefinitionReader reader = new PropertiesBeanDefinitionReader(registry);
         reader.loadBeanDefinitions("classpath:beans.properties");
         return (BeanFactory) registry;
+    }
+
+    @Test
+    public void testAnnoation() {
+        final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:beans-annotation.xml");
+        final com.geek.design.annotion.FXNewsProvider provider = (com.geek.design.annotion.FXNewsProvider) context.getBean("FXNewsProvider");
+        provider.getAndPersistNews();
     }
 }
