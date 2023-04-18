@@ -6,10 +6,7 @@ import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.PropertyValue;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.config.ConstructorArgumentValues;
-import org.springframework.beans.factory.support.AbstractBeanDefinition;
-import org.springframework.beans.factory.support.BeanDefinitionRegistry;
-import org.springframework.beans.factory.support.DefaultListableBeanFactory;
-import org.springframework.beans.factory.support.RootBeanDefinition;
+import org.springframework.beans.factory.support.*;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
@@ -71,6 +68,20 @@ public class NewsProviderTest {
         // propertyValues.addPropertyValue(new PropertyValue("newsPersister", newsPersister));
         // newsProvider.setPropertyValues(propertyValues);
 
+        return (BeanFactory) registry;
+    }
+
+    @Test
+    public void testBeanFactoryFromProperties() {
+        DefaultListableBeanFactory beanRegitry = new DefaultListableBeanFactory();
+        final BeanFactory beanFactory = bindViaProperties(beanRegitry);
+        final FXNewsProvider provider = (FXNewsProvider) beanFactory.getBean("djNewsProvider");
+        provider.getAndPersistNews();
+    }
+
+    private BeanFactory bindViaProperties(BeanDefinitionRegistry registry) {
+        final PropertiesBeanDefinitionReader reader = new PropertiesBeanDefinitionReader(registry);
+        reader.loadBeanDefinitions("classpath:beans.properties");
         return (BeanFactory) registry;
     }
 }
