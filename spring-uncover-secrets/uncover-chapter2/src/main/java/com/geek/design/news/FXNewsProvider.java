@@ -1,8 +1,4 @@
-package com.geek.design.springDemo;
-
-import com.geek.design.originalDemo.FxNewsBean;
-import com.geek.design.originalDemo.IFXNewsPersister;
-import com.geek.design.originalDemo.IFxNewListener;
+package com.geek.design.news;
 
 public class FXNewsProvider {
     private IFxNewListener djNewsListener;
@@ -25,6 +21,5 @@ public class FXNewsProvider {
             djNewsPersister.persistNews(newsBean);
             djNewsListener.postProcessIfNecessary(newId);
         }
-
     }
 }

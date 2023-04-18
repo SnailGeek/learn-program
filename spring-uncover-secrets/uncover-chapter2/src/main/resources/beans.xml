@@ -2,14 +2,10 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <bean id="djNewsListener" class="com.geek.design.originalDemo.DowJonesNewsListener"/>
-    <bean id="djNewsPersister" class="com.geek.design.originalDemo.DowJonesNewsPersister"/>
-    <bean id="djNewsProvider" class="com.geek.design.springDemo.FXNewsProvider">
-        <constructor-arg index="0">
-            <ref bean="djNewsListener"/>
-        </constructor-arg>
-        <constructor-arg index="1">
-            <ref bean="djNewsPersister"/>
-        </constructor-arg>
+    <bean id="djNewsListener" class="com.geek.design.news.DowJonesNewsListener"/>
+    <bean id="djNewsPersister" class="com.geek.design.news.DowJonesNewsPersister"/>
+    <bean id="djNewsProvider" class="com.geek.design.news.FXNewsProvider">
+        <constructor-arg ref="djNewsListener"/>
+        <constructor-arg ref="djNewsPersister"/>
     </bean>
 </beans>
