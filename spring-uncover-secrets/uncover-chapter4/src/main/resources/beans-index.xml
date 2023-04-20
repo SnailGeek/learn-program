@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="mockBO" class="com.snail.beanTag.MockBusinessObjectIndex">
+        <constructor-arg index="1" value="11111"/>
+        <constructor-arg index="0" value="22222"/>
+    </bean>
+
+    <bean id="mockBoSetter" class="com.snail.beanTag.MockBusinessObjectSetter">
+        <property name="dependency1" value="1111"/>
+        <property name="dependency2" value="2222"/>
+    </bean>
+
+
+    <!--和construct-arg结合使用-->
+    <!--    <bean id="mockBoSetter" class="com.snail.beanTag.MockBusinessObjectSetter">-->
+    <!--        <constructor-arg value="1111"/>-->
+    <!--        <property name="dependency2" value="2222"/>-->
+    <!--    </bean>-->
+
+
+
+</beans>

@@ -87,7 +87,7 @@ public class NewsProviderTest {
     }
 
     @Test
-    public void testAnnoation() {
+    public void testAnnotation() {
         final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:beans-annotation.xml");
         final com.geek.design.annotion.FXNewsProvider provider = (com.geek.design.annotion.FXNewsProvider) context.getBean("FXNewsProvider");
         provider.getAndPersistNews();
