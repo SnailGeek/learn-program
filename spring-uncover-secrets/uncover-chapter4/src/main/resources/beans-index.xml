@@ -13,6 +13,11 @@
         <property name="dependency2" value="2222"/>
     </bean>
 
+<!--    <bean id="fooBean" class="com.snail.autowire.Foo" autowire="byName"/>-->
+<!--    <bean id="emphasisAttribute" class="com.snail.autowire.Bar"/>-->
+
+    <bean id="fooConstructorBean" class="com.snail.autowire.FooConstructor" autowire="constructor"/>
+    <bean id="bar" class="com.snail.autowire.Bar"/>
 
     <!--和construct-arg结合使用-->
     <!--    <bean id="mockBoSetter" class="com.snail.beanTag.MockBusinessObjectSetter">-->

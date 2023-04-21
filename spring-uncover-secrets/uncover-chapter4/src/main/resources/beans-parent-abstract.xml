@@ -9,20 +9,21 @@
         </constructor-arg>
     </bean>
 
-    <bean id="newsProvider" class="com.snail.news.FXNewsProvider">
-        <property name="djNewsListener" >
-            <ref bean="djNewsListener"/>
-        </property>
-        <property name="djNewsPersister" >
+    <bean id="newsProviderTemplate" abstract="true">
+        <property name="djNewsPersister">
             <ref bean="djNewsPersister"/>
         </property>
     </bean>
-
-    <bean id="djNewsListener" class="com.snail.news.DowJonesNewsListener"/>
     <bean id="djNewsPersister" class="com.snail.news.DowJonesNewsPersister"/>
 
-    <bean id="specificNewsProvider" class="com.snail.news.SpecificFXNewsProvider" parent="newsProvider">
-        <!--子类可以对特性的属性进行修改-->
+    <bean id="newsProvider" parent="newsProviderTemplate" class="com.snail.news.FXNewsProvider">
+        <property name="djNewsListener">
+            <ref bean="djNewsListener"/>
+        </property>
+    </bean>
+    <bean id="djNewsListener" class="com.snail.news.DowJonesNewsListener"/>
+
+    <bean id="specificNewsProvider" class="com.snail.news.SpecificFXNewsProvider" parent="newsProviderTemplate">
         <property name="djNewsListener">
             <ref bean="specificNewsListener"/>
         </property>
