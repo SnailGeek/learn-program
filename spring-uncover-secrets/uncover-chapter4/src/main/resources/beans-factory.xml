@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="foo" class="com.snail.factory.Foo">
+        <property name="barInstance" ref="bar"/>
+    </bean>
+    <!--静态工厂方法实现注入Foo-->
+    <bean name="bar" class="com.snail.factory.StaticBarInterfaceFactory" factory-method="getInstance">
+        <constructor-arg ref="fooBar"/>
+    </bean>
+    <bean id="fooBar" class="com.snail.factory.FooBar"/>
+
+</beans>
