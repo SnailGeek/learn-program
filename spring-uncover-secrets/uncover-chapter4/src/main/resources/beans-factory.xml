@@ -17,5 +17,9 @@
     <!--    </bean>-->
     <!--    <bean id="fooBar" class="com.snail.factory.FooBar"/>-->
 
+    <bean id="nextDayDateDisplayer" class="com.snail.factory.NextDayDateDisplayer">
+        <property name="dateOfNextDay" ref="nextDayDate"/>
+    </bean>
+    <bean id="nextDayDate" class="com.snail.factory.NextDayDateFactoryBean"/>
 
 </beans>
