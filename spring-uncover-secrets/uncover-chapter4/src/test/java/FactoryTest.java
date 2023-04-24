@@ -9,4 +9,11 @@ public class FactoryTest {
         final Foo foo = (Foo) context.getBean("foo");
         foo.printInstance();
     }
+
+    @Test
+    public void testNonStaticFactory() {
+        final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:beans-factory.xml");
+        final Foo foo = (Foo) context.getBean("foo");
+        foo.printInstance();
+    }
 }

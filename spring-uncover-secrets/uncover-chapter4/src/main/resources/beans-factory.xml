@@ -7,10 +7,15 @@
     <bean id="foo" class="com.snail.factory.Foo">
         <property name="barInstance" ref="bar"/>
     </bean>
+
+    <bean id="barFactory" class="com.snail.factory.NonStatciBarInterfaceFactory"/>
+    <bean id="bar" factory-bean="barFactory" factory-method="getInstance"/>
+
     <!--静态工厂方法实现注入Foo-->
-    <bean name="bar" class="com.snail.factory.StaticBarInterfaceFactory" factory-method="getInstance">
-        <constructor-arg ref="fooBar"/>
-    </bean>
-    <bean id="fooBar" class="com.snail.factory.FooBar"/>
+    <!--    <bean name="bar" class="com.snail.factory.StaticBarInterfaceFactory" factory-method="getInstance">-->
+    <!--        <constructor-arg ref="fooBar"/>-->
+    <!--    </bean>-->
+    <!--    <bean id="fooBar" class="com.snail.factory.FooBar"/>-->
+
 
 </beans>
