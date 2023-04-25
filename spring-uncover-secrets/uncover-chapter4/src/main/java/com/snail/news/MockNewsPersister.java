@@ -1,7 +1,16 @@
 package com.snail.news;
 
-public class MockNewsPersister implements IFXNewsPersister {
-    private FxNewsBean newsBean;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.BeanFactoryAware;
+
+public class MockNewsPersister implements IFXNewsPersister, BeanFactoryAware {
+    private BeanFactory beanFactory;
+
+    @Override
+    public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
+        this.beanFactory = beanFactory;
+    }
 
     @Override
     public void persistNews(FxNewsBean newsBean) {
@@ -13,10 +22,6 @@ public class MockNewsPersister implements IFXNewsPersister {
     }
 
     public FxNewsBean getNewsBean() {
-        return newsBean;
-    }
-
-    public void setNewsBean(FxNewsBean newsBean) {
-        this.newsBean = newsBean;
+        return (FxNewsBean) beanFactory.getBean("newsBean");
     }
 }
