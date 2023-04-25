@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!--    <bean id="mockBO" class="com.snail.beanTag.MockBusinessObject">-->
+<!--        <constructor-arg type="int">-->
+<!--            <value>123456</value>-->
+<!--        </constructor-arg>-->
+<!--    </bean>-->
+
+<!--    <bean id="newsProvider" class="com.snail.news.FXNewsProvider">-->
+<!--        <property name="djNewsListener">-->
+<!--            <ref bean="djNewsListener"/>-->
+<!--        </property>-->
+<!--        <property name="djNewsPersister">-->
+<!--            <ref bean="djNewsPersister"/>-->
+<!--        </property>-->
+<!--    </bean>-->
+
+<!--    <bean id="djNewsListener" class="com.snail.news.DowJonesNewsListener"/>-->
+<!--    <bean id="djNewsPersister" class="com.snail.news.DowJonesNewsPersister"/>-->
+
+<!--    <bean id="specificNewsProvider" class="com.snail.news.SpecificFXNewsProvider" parent="newsProvider">-->
+<!--        &lt;!&ndash;子类可以对特性的属性进行修改&ndash;&gt;-->
+<!--        <property name="djNewsListener">-->
+<!--            <ref bean="specificNewsListener"/>-->
+<!--        </property>-->
+<!--    </bean>-->
+<!--    <bean id="specificNewsListener" class="com.snail.news.DowJonesNewsListener"/>-->
+
+    <bean id="newsBean" class="com.snail.news.FxNewsBean" scope="prototype"/>
+    <bean id="mockPersister" class="com.snail.news.MockNewsPersister">
+        <lookup-method name="getNewsBean" bean="newsBean"/>
+    </bean>
+<!--    <property name="newsBean" ref="newsBean"/>-->
+    <!--    <lookup-method name="getNewsBean" bean="newsBean"/>-->
+
+</beans>
