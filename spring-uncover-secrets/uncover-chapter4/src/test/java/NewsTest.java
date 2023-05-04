@@ -1,4 +1,5 @@
 import com.snail.news.MockNewsPersister;
+import com.snail.news.MockNewsPersisterByObjectCreating;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -10,4 +11,13 @@ public class NewsTest {
         mockPersister.persistNews();
         mockPersister.persistNews();
     }
+
+    @Test
+    public void testMock2() {
+        final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:beans-news.xml");
+        final MockNewsPersisterByObjectCreating mockPersister = (MockNewsPersisterByObjectCreating) context.getBean("mockPersisterByCreating");
+        mockPersister.persistNews();
+        mockPersister.persistNews();
+    }
+
 }

@@ -29,8 +29,18 @@
     <!--    </bean>-->
     <!--    <bean id="specificNewsListener" class="com.snail.news.DowJonesNewsListener"/>-->
 
-    <bean id="newsBean" class="com.snail.news.FxNewsBean" scope="prototype"/>
     <bean id="mockPersister" class="com.snail.news.MockNewsPersister"/>
+
+    <bean id="newsBean" class="com.snail.news.FxNewsBean" scope="prototype"/>
+    <bean id="newsBeanFactory" class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
+        <property name="targetBeanName">
+            <idref bean="newsBean"/>
+        </property>
+    </bean>
+    <bean id="mockPersisterByCreating" class="com.snail.news.MockNewsPersisterByObjectCreating">
+        <property name="newsBeanFactory" ref="newsBeanFactory"/>
+    </bean>
+
     <!--    <property name="newsBean" ref="newsBean"/>-->
     <!--    <lookup-method name="getNewsBean" bean="newsBean"/>-->
 
