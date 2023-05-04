@@ -1,3 +1,4 @@
+import com.snail.news.FXNewsProvider;
 import com.snail.news.MockNewsPersister;
 import com.snail.news.MockNewsPersisterByObjectCreating;
 import org.junit.Test;
@@ -18,6 +19,13 @@ public class NewsTest {
         final MockNewsPersisterByObjectCreating mockPersister = (MockNewsPersisterByObjectCreating) context.getBean("mockPersisterByCreating");
         mockPersister.persistNews();
         mockPersister.persistNews();
+    }
+
+    @Test
+    public void testReplacer() {
+        final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:beans-news.xml");
+        final FXNewsProvider provider = (FXNewsProvider) context.getBean("newsProvider");
+        provider.getAndPersistNews();
     }
 
 }

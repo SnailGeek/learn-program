@@ -9,17 +9,16 @@
     <!--        </constructor-arg>-->
     <!--    </bean>-->
 
-    <!--    <bean id="newsProvider" class="com.snail.news.FXNewsProvider">-->
-    <!--        <property name="djNewsListener">-->
-    <!--            <ref bean="djNewsListener"/>-->
-    <!--        </property>-->
-    <!--        <property name="djNewsPersister">-->
-    <!--            <ref bean="djNewsPersister"/>-->
-    <!--        </property>-->
-    <!--    </bean>-->
+    <bean id="newsProvider" class="com.snail.news.FXNewsProvider">
+        <property name="djNewsListener" ref="djNewsListener"/>
+        <property name="djNewsPersister" ref="djNewsPersister"/>
+        <replaced-method name="getAndPersistNews" replacer="providerReplacer"/>
+    </bean>
 
-    <!--    <bean id="djNewsListener" class="com.snail.news.DowJonesNewsListener"/>-->
-    <!--    <bean id="djNewsPersister" class="com.snail.news.DowJonesNewsPersister"/>-->
+    <bean id="providerReplacer" class="com.snail.news.FXNewsProviderMethodReplacer"/>
+
+    <bean id="djNewsListener" class="com.snail.news.DowJonesNewsListener"/>
+    <bean id="djNewsPersister" class="com.snail.news.DowJonesNewsPersister"/>
 
     <!--    <bean id="specificNewsProvider" class="com.snail.news.SpecificFXNewsProvider" parent="newsProvider">-->
     <!--        &lt;!&ndash;子类可以对特性的属性进行修改&ndash;&gt;-->
