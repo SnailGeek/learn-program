@@ -7,13 +7,28 @@
         <property name="date" value="2023/10/16"/>
     </bean>
 
+    <!--    <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">-->
+    <!--        <property name="customEditors">-->
+    <!--            <map>-->
+    <!--                <entry key="java.util.Date" value="com.snail.property.DatePropertyEditor"/>-->
+    <!--            </map>-->
+    <!--        </property>-->
+    <!--    </bean>-->
+
     <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
-        <property name="customEditors">
-            <map>
-                <entry key="java.util.Date" value="com.snail.property.DatePropertyEditor"/>
-            </map>
+        <property name="propertyEditorRegistrars">
+            <list>
+                <ref bean="datePropertyEditorRegistrar"/>
+            </list>
         </property>
     </bean>
 
+    <bean id="datePropertyEditorRegistrar" class="com.snail.property.DatePropertyEditorRegistrar">
+        <property name="propertyEditor" ref="datePropertyEditor"/>
+    </bean>
+
+    <bean id="datePropertyEditor" class="com.snail.property.DatePropertyEditor">
+        <property name="datePattern" value="yyyy/MM/dd"/>
+    </bean>
 
 </beans>
