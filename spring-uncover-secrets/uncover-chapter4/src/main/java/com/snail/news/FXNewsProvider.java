@@ -12,6 +12,14 @@ public class FXNewsProvider {
         this.djNewsPersister = djNewsPersister;
     }
 
+    public IFxNewListener getDjNewsListener() {
+        return djNewsListener;
+    }
+
+    public IFXNewsPersister getDjNewsPersister() {
+        return djNewsPersister;
+    }
+
     public void getAndPersistNews() {
         System.out.println("invoke getAndPersistNews");
         final String[] newIds = djNewsListener.getAvailableNewIds();
