@@ -27,6 +27,4 @@ public class DowJonesNewsListener implements IFxNewListener, PasswordDecodable {
     public void setDecodedPassword(String password) {
         System.out.println("setDecodePassword: " + password);
     }
-
-
 }

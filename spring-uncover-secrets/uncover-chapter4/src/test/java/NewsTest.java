@@ -32,7 +32,6 @@ public class NewsTest {
     @Test
     public void testCustomPostProcessor() {
         final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:beans-news.xml");
-//        final DowJonesNewsListener listener = (DowJonesNewsListener) context.getBean("djNewsListener");
     }
 
 }
