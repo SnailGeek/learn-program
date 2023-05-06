@@ -1,3 +1,4 @@
+import com.snail.news.DowJonesNewsListener;
 import com.snail.news.FXNewsProvider;
 import com.snail.news.MockNewsPersister;
 import com.snail.news.MockNewsPersisterByObjectCreating;
@@ -26,6 +27,12 @@ public class NewsTest {
         final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:beans-news.xml");
         final FXNewsProvider provider = (FXNewsProvider) context.getBean("newsProvider");
         provider.getAndPersistNews();
+    }
+
+    @Test
+    public void testCustomPostProcessor() {
+        final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:beans-news.xml");
+//        final DowJonesNewsListener listener = (DowJonesNewsListener) context.getBean("djNewsListener");
     }
 
 }

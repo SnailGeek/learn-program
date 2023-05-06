@@ -40,6 +40,7 @@
         <property name="newsBeanFactory" ref="newsBeanFactory"/>
     </bean>
 
+    <bean id="passwordDecodePostProcessor" class="com.snail.news.PasswordDecodePostProcessor"/>
     <!--    <property name="newsBean" ref="newsBean"/>-->
     <!--    <lookup-method name="getNewsBean" bean="newsBean"/>-->
 
