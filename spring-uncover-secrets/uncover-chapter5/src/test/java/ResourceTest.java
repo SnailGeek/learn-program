@@ -1,12 +1,14 @@
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.io.UrlResource;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import java.util.Locale;
+
+import static org.junit.Assert.*;
 
 public class ResourceTest {
     @Test
@@ -20,5 +22,14 @@ public class ResourceTest {
 
         final Resource urlResource = resourceLoader.getResource("http://spring21.cn");
         assertTrue(urlResource instanceof UrlResource);
+    }
+
+    @Test
+    public void testMessageSource() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+        final String fileMenuName = context.getMessage("menu.file", new Object[]{"F"}, Locale.US);
+        final String editMenuName = context.getMessage("menu.edit", null, Locale.US);
+        assertEquals("File(F)", fileMenuName);
+        assertEquals("Edit", editMenuName);
     }
 }
