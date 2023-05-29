@@ -20,6 +20,10 @@
         </property>
     </bean>
 
+    <bean id="validator" class="com.snail.resourceLoader.Validator">
+        <property name="messageSource" ref="messageSource"/>
+    </bean>
+
     <!--    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">-->
     <!--        <property name="basename" value="classpath:/messages"/>-->
     <!--    </bean>-->

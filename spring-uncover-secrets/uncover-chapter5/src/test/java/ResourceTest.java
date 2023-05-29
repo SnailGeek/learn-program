@@ -1,3 +1,4 @@
+import com.snail.resourceLoader.Validator;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -31,5 +32,13 @@ public class ResourceTest {
         final String editMenuName = context.getMessage("menu.edit", null, Locale.US);
         assertEquals("File(F)", fileMenuName);
         assertEquals("Edit", editMenuName);
+    }
+
+    @Test
+    public void testValidate() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+        final Validator validator = (Validator) context.getBean("validator");
+        validator.validate();
+
     }
 }
