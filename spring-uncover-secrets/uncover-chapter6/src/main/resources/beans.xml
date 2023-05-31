@@ -4,8 +4,9 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!--基于配置文件的方式-->
-    <beans default-autowire="byType">
-        <bean id="newsProvider" class="com.snail.news.FXNewsProvider" autowire="byType"/>
+    <beans>
+        <bean id="" class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
+        <bean id="newsProvider" class="com.snail.news.FXNewsProvider"/>
         <bean id="djNewsListener" class="com.snail.news.DowJonesNewsListener"/>
         <bean id="djNewsPersister" class="com.snail.news.DowJonesNewsPersister"/>
     </beans>
