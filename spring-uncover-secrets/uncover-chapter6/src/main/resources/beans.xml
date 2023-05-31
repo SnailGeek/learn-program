@@ -5,7 +5,7 @@
 
     <!--基于配置文件的方式-->
     <beans>
-        <bean id="" class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
+        <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
         <bean id="newsProvider" class="com.snail.news.FXNewsProvider"/>
         <bean id="djNewsListener" class="com.snail.news.DowJonesNewsListener"/>
         <bean id="djNewsPersister" class="com.snail.news.DowJonesNewsPersister"/>

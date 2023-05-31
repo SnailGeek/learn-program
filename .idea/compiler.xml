@@ -20,9 +20,11 @@
         <module name="geek-principle" />
         <module name="uncover-chapter4" />
         <module name="webflux6" />
+        <module name="uncover-chapter5" />
         <module name="my-spring-mvc" />
         <module name="uncover-chapter2" />
         <module name="lagou-transfer-ioc-xml-anno" />
+        <module name="uncover-chapter6" />
         <module name="lagou-transfer-ioc-anno" />
         <module name="mvc" />
         <module name="springboot01_demo" />
