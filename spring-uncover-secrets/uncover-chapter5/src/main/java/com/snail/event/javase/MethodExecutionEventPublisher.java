@@ -1,4 +1,6 @@
-package com.snail.event;
+package com.snail.event.javase;
+
+import com.snail.event.MethodExecutionStatus;
 
 import java.util.ArrayList;
 import java.util.List;

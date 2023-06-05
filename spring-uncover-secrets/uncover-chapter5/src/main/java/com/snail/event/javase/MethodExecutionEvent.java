@@ -1,4 +1,4 @@
-package com.snail.event;
+package com.snail.event.javase;
 
 import java.util.EventObject;
 
