@@ -23,6 +23,12 @@
             <artifactId>joda-time</artifactId>
             <version>2.10.5</version>
         </dependency>
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+            <version>2.1_2</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
 </project>
