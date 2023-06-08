@@ -7,28 +7,30 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="spring-data-jpa" />
-        <module name="geek-auth" />
         <module name="lagou-mq" />
         <module name="lagou-transfer-iocxml" />
-        <module name="lagou-transfer" />
         <module name="ssm" />
-        <module name="minicat" />
         <module name="webflux3_1" />
         <module name="lagou-transfer-transaction" />
         <module name="springmvc-demo" />
         <module name="geek-design-pattern" />
-        <module name="geek-principle" />
         <module name="uncover-chapter4" />
         <module name="webflux6" />
         <module name="uncover-chapter5" />
         <module name="my-spring-mvc" />
         <module name="uncover-chapter2" />
-        <module name="lagou-transfer-ioc-xml-anno" />
+        <module name="uncover-chapter8" />
+        <module name="uncover-chapter9" />
         <module name="uncover-chapter6" />
         <module name="lagou-transfer-ioc-anno" />
         <module name="mvc" />
         <module name="springboot01_demo" />
         <module name="zdy-spring-booot-starter" />
+        <module name="geek-auth" />
+        <module name="lagou-transfer" />
+        <module name="minicat" />
+        <module name="geek-principle" />
+        <module name="lagou-transfer-ioc-xml-anno" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
