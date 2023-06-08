@@ -2,9 +2,15 @@ package com.snail.proxy;
 
 import com.snail.cglib.RequestCtrlCallback;
 import com.snail.cglib.Requestable;
+import com.snail.control.TargetCaller;
+import com.snail.control.TargetObject;
 import junit.framework.TestCase;
 import net.sf.cglib.proxy.Enhancer;
+import org.aspectj.weaver.tools.PointcutPrimitive;
 import org.junit.Test;
+import org.springframework.aop.aspectj.AspectJWeaverMessageHandler;
+import org.springframework.aop.aspectj.autoproxy.AspectJAwareAdvisorAutoProxyCreator;
+import org.springframework.aop.support.ControlFlowPointcut;
 
 import java.lang.reflect.Proxy;
 
@@ -37,5 +43,16 @@ public class SubjectProxyTest extends TestCase {
 
         final Requestable requestable = (Requestable) enhancer.create();
         requestable.request();
+    }
+
+    @Test
+    public void testControlFlow() {
+        final ControlFlowPointcut controlFlowPointcut = new ControlFlowPointcut(TargetCaller.class);
+//        Advice advice = ;
+        final TargetObject target = new TargetObject();
+        final AspectJAwareAdvisorAutoProxyCreator creator = new AspectJAwareAdvisorAutoProxyCreator();
+        
+
+
     }
 }
