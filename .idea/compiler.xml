@@ -11,6 +11,7 @@
         <module name="lagou-transfer-iocxml" />
         <module name="ssm" />
         <module name="webflux3_1" />
+        <module name="learn-tika" />
         <module name="lagou-transfer-transaction" />
         <module name="springmvc-demo" />
         <module name="geek-design-pattern" />
@@ -33,16 +34,11 @@
         <module name="lagou-transfer-ioc-xml-anno" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="lagou-spring-security" target="11" />
-      <module name="security-demo" target="11" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="lagou-spring-security" options="" />
+      <module name="learn-tika" options="-parameters" />
       <module name="mvc" options="-parameters" />
-      <module name="security-demo" options="-parameters" />
       <module name="springboot01_demo" options="-parameters" />
     </option>
   </component>

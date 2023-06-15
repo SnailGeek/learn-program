@@ -5,4 +5,9 @@ public class MyServiceImpl implements MyService {
     public void doSomething() throws ApplicationException {
         throw new ApplicationException();
     }
+
+    @Override
+    public void doSth() {
+        System.out.println("my service do sth");
+    }
 }
