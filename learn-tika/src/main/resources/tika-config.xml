@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<properties>
+    <parsers>
+        <parser class="org.apache.tika.parser.DefaultParser">
+
+            <mime-exclude>application/vnd.openxmlformats-officedocument.wordprocessingml.document</mime-exclude>
+<!--            <parser-exclude class="org.apache.tika.parser.executable.ExecutableParser"/>-->
+        </parser>
+        <parser class="com.snail.learntika.cutom.CustomParser">
+            <mime>application/vnd.openxmlformats-officedocument.wordprocessingml.document</mime>
+        </parser>
+    </parsers>
+</properties>
