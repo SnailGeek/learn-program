@@ -215,7 +215,7 @@ public class DocPOIUtils {
 
 
     public static void main(String[] args) throws Exception {
-        String sourceFile = "F:\\temp\\文档结构化测试\\图片可以用文档测试2.doc";
+        String sourceFile = "F:\\temp\\文档结构化测试\\图片可以用文档测试3.doc";
         parseDoc(new FileInputStream(sourceFile));
 //        readTable(new FileInputStream(sourceFile));
     }

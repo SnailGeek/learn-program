@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class DocxPOIUtils2 {
     public static void main(String[] args) throws Exception {
-        String sourceFile = "F:\\temp\\文档结构化测试\\复杂表格.docx";
+        String sourceFile = "F:\\temp\\文档结构化测试\\tika文档测试.docx";
         getAllTable2(sourceFile);
     }
 

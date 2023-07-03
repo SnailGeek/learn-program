@@ -3,6 +3,7 @@ import com.snail.advice.AroudAdviceService;
 import com.snail.advice.AroundAdviceConfig;
 import com.snail.advice.MyService;
 import org.junit.Test;
+import org.springframework.aop.support.DefaultPointcutAdvisor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -26,5 +27,7 @@ public class AdviceTest {
         ApplicationContext context = new AnnotationConfigApplicationContext(AroundAdviceConfig.class);
         AroudAdviceService myService = context.getBean(AroudAdviceService.class);
         System.out.println(myService.demo2());
+
+        DefaultPointcutAdvisor advisor = new DefaultPointcutAdvisor();
     }
 }
