@@ -1,14 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:context="http://www.springframework.org/schema/context"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans.xsd
-       http://www.springframework.org/schema/context/context.xsd">
-    <context:component-scan base-package="com.snail"/>
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--    <context:component-scan base-package="com.snail"/>-->
     <!--基于配置文件的方式-->
 
+<!--    <bean id="task" class="com.snail.weave.MockTask" scope="prototype"/>-->
+
+<!--    <bean id="introductionInterceptor" class="org.springframework.aop.support.DelegatingIntroductionInterceptor"-->
+<!--          scope="prototype">-->
+<!--        <constructor-arg>-->
+<!--            <bean class="com.snail.weave.CounterImpl"/>-->
+<!--        </constructor-arg>-->
+<!--    </bean>-->
+
+<!--    <bean id="introducedTask" class="org.springframework.aop.framework.ProxyFactoryBean" scope="prototype">-->
+<!--        <property name="targetName" value="task"/>-->
+<!--        <property name="interfaces">-->
+<!--            <list>-->
+<!--                <value>com.snail.weave.ITask</value>-->
+<!--                <value>com.snail.weave.ICounter</value>-->
+<!--            </list>-->
+<!--        </property>-->
+<!--        <property name="interceptorNames">-->
+<!--            <list>-->
+<!--                <value>introductionInterceptor</value>-->
+<!--            </list>-->
+<!--        </property>-->
+<!--    </bean>-->
+
+<!--    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"/>-->
 
 
+    <bean id="task" class="com.snail.weave.MockTask"/>
+    <bean id="hotSwapTargetSource" class="org.springframework.aop.target.HotSwappableTargetSource">
+        <constructor-arg ref="task"/>
+    </bean>
+
+    <bean id="performanceInterceptor" class="com.snail.advice.PerformanceMethodInterceptor"/>
+
+    <bean id="taskProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="targetSource" ref="hotSwapTargetSource"/>
+        <property name="interceptorNames">
+            <list>
+                <value>performanceInterceptor</value>
+            </list>
+        </property>
+    </bean>
 
 </beans>
