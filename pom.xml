@@ -20,6 +20,7 @@
         <module>lagou-spring-webflux</module>
         <module>lagou-tomcat</module>
         <module>spring-uncover-secrets</module>
+        <module>design-pattern</module>
     </modules>
 
     <properties>
