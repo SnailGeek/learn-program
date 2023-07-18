@@ -5,6 +5,8 @@ import org.apache.commons.lang.exception.ExceptionUtils;
 import org.aspectj.lang.JoinPoint;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.springframework.util.StopWatch;
 
 public class SchemaBasedAspect {
     private final Log logger = LogFactory.getLog(SchemaBasedAspect.class);
@@ -29,5 +31,16 @@ public class SchemaBasedAspect {
 
     public void doAfter() {
         logger.warn("release system resources, etc...");
+    }
+
+    public Object doProfile(ProceedingJoinPoint pjp) throws Throwable {
+        StopWatch watch = new StopWatch();
+        try {
+            watch.start();
+            return pjp.proceed();
+        } finally {
+            watch.stop();
+            logger.info(watch);
+        }
     }
 }
