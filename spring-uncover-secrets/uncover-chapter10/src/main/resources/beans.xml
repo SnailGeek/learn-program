@@ -7,12 +7,25 @@
        http://www.springframework.org/schema/aop
        http://www.springframework.org/schema/aop/spring-aop.xsd">
     <aop:aspectj-autoproxy proxy-target-class="true"/>
-<!--    <bean class="org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator">-->
-<!--        <property name="proxyTargetClass" value="true"/>-->
-<!--    </bean>-->
+    <!--    <bean class="org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator">-->
+    <!--        <property name="proxyTargetClass" value="true"/>-->
+    <!--    </bean>-->
 
     <bean id="performanceAspect" class="com.snail.aspect.PerformanceTraceAspect"/>
 
     <bean id="target" class="com.snail.aspect.Foo"/>
+
+    <bean id="schemaBasedAspect" class="com.snail.schema.SchemaBasedAspect"/>
+
+    <aop:config>
+        <aop:aspect id="myAspect" ref="schemaBasedAspect" order="2">
+            <aop:pointcut id="privatePointcut" expression="execution(public void *.doSth())"/>
+            <aop:before pointcut-ref="privatePointcut" method="doBefore"/>
+            <aop:after-returning pointcut-ref="privatePointcut" method="doAfter"/>
+            <aop:after-throwing method="doAfterThrowing" pointcut-ref="privatePointcut" throwing="e"/>
+            <aop:after pointcut-ref="privatePointcut" method="doAfter"/>
+        </aop:aspect>
+    </aop:config>
+
 
 </beans>
