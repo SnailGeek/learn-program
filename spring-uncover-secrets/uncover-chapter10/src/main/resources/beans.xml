@@ -15,20 +15,10 @@
 
     <bean id="target" class="com.snail.aspect.Foo"/>
 
-    <bean id="schemaBasedAspect" class="com.snail.schema.SchemaBasedAspect"/>
+    <bean id="multiAdviceAspect" class="com.snail.advice.MultiAdviceAspect"/>
 
-    <aop:config>
-        <aop:aspect id="myAspect" ref="schemaBasedAspect" order="2">
-            <aop:pointcut id="privatePointcut" expression="execution(public void *.doSth())"/>
-            <aop:before pointcut-ref="privatePointcut" method="doBefore"/>
-            <aop:after-returning pointcut-ref="privatePointcut" method="doAfter"/>
-            <aop:after-throwing pointcut-ref="privatePointcut" method="doAfterThrowing" throwing="e"/>
-            <aop:after pointcut-ref="privatePointcut" method="doAfter"/>
-            <aop:around pointcut-ref="privatePointcut" method="doProfile"/>
-            <aop:declare-parents types-matching="com.snail.*" implement-interface="com.snail.weave.ICounter"
-                                 default-impl="com.snail.weave.CounterImpl"/>
-        </aop:aspect>
-    </aop:config>
+    <bean id="anotherAdviceAspect" class="com.snail.advice.AnotherAdviceAspect"/>
 
+    <bean id="mockTask" class="com.snail.advice.MockTask"/>
 
 </beans>

@@ -1,3 +1,4 @@
+import com.snail.advice.ITask;
 import com.snail.aspect.Foo;
 import com.snail.aspect.PerformanceTraceAspect;
 import org.junit.Test;
@@ -21,7 +22,14 @@ public class AspectTest {
     public void testAutoProxy() {
         final ApplicationContext context = new ClassPathXmlApplicationContext("classpath:beans.xml");
         final Object target = context.getBean("target");
-        ((Foo)target).method1();
-        ((Foo)target).method2();
+        ((Foo) target).method1();
+        ((Foo) target).method2();
+    }
+
+    @Test
+    public void testMultiAdvice() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("classpath:beans.xml");
+        final ITask task = (ITask) context.getBean("mockTask");
+        task.execute("save task");
     }
 }
