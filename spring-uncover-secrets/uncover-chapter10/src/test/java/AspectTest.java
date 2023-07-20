@@ -1,3 +1,4 @@
+import com.snail.advice.ITask;
 import com.snail.aspect.Foo;
 import com.snail.aspect.NestableInvocationBO;
 import com.snail.aspect.PerformanceTraceAspect;
@@ -36,5 +37,12 @@ public class AspectTest {
         NestableInvocationBO proxy = (NestableInvocationBO) weaver.getProxy();
         proxy.method2();
         proxy.method1();
+    }
+
+    @Test
+    public void testMultiAdvice() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("classpath:beans.xml");
+        final ITask task = (ITask) context.getBean("mockTask");
+        task.execute("save task");
     }
 }
