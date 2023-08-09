@@ -19,6 +19,8 @@
         <module>uncover-chapter8</module>
         <module>uncover-chapter9</module>
         <module>uncover-chapter10</module>
+        <module>uncover-secrets-data</module>
+        <module>uncover-secrets-transaction</module>
     </modules>
 
     <properties>
