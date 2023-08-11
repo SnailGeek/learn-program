@@ -21,6 +21,7 @@
         <module>lagou-tomcat</module>
         <module>spring-uncover-secrets</module>
         <module>design-pattern</module>
+        <module>learn-tomcat</module>
     </modules>
 
     <properties>
