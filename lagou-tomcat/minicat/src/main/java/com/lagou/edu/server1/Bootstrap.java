@@ -11,9 +11,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.concurrent.*;
 
 /**
  * Minicat的主类
@@ -36,6 +35,22 @@ public class Bootstrap {
 
         // 加载解析相关配置，web.xml
         loadServlet();
+
+        // 定义一个线程池
+        int corePoolSize = 10;
+        int maximumPoolSize = 50;
+        long keepAliveTime = 100L;
+        TimeUnit unit = TimeUnit.SECONDS;
+        BlockingQueue<Runnable> workQueue = new ArrayBlockingQueue<>(50);
+        ThreadFactory threadFactory = Executors.defaultThreadFactory();
+        RejectedExecutionHandler handler = new ThreadPoolExecutor.AbortPolicy();
+        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(corePoolSize,
+                maximumPoolSize,
+                keepAliveTime,
+                unit,
+                workQueue,
+                threadFactory,
+                handler);
 
 
         // 完成Minicat 1.0版本（浏览器请求http://localhost:8080 , 返回一个固定的字符串道页面）
@@ -74,7 +89,7 @@ public class Bootstrap {
          * Micat3.0
          * 请求动态资源
          */
-        while (true) {
+        /*while (true) {
             Socket socket = serverSocket.accept();
             final InputStream input = socket.getInputStream();
 
@@ -91,6 +106,25 @@ public class Bootstrap {
                 httpServlet.service(request, response);
             }
             socket.close();
+        }*/
+
+        /**
+         * 多线程改造（不使用线程池）
+         */
+        /*while (true) {
+            Socket socket = serverSocket.accept();
+            RequestProcessor requestProcessor = new RequestProcessor(socket, servletMap);
+            requestProcessor.start();
+        }*/
+
+        System.out.println("=========>>>>使用线程池进行多线程改造");
+        /**
+         * 多线程改造，线程池（使用线程池）
+         */
+        while (true) {
+            Socket socket = serverSocket.accept();
+            RequestProcessor requestProcessor = new RequestProcessor(socket, servletMap);
+            threadPoolExecutor.execute(requestProcessor);
         }
     }
 
