@@ -2,7 +2,7 @@
 <web-app>
     <servlet>
         <servlet-name>lagou</servlet-name>
-        <servlet-class>com.lagou.edu.server.LagouServlet</servlet-class>
+        <servlet-class>com.lagou.edu.server1.LagouServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
