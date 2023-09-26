@@ -24,6 +24,7 @@
         <module>learn-tomcat</module>
         <module>lagou-distributed</module>
         <module>lagou-distributed</module>
+        <module>lagou-session</module>
     </modules>
 
     <properties>
