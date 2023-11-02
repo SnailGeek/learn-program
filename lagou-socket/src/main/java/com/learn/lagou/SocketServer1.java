@@ -2,7 +2,6 @@ package com.learn.lagou;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.log4j.BasicConfigurator;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,7 +11,7 @@ import java.net.Socket;
 
 public class SocketServer1 {
     static {
-        BasicConfigurator.configure();
+//        BasicConfigurator.configure();
     }
 
     private static final Log LOGGER = LogFactory.getLog(SocketServer1.class);

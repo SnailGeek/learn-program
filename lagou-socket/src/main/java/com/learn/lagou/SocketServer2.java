@@ -2,19 +2,16 @@ package com.learn.lagou;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.log4j.BasicConfigurator;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 public class SocketServer2 {
     static {
-        BasicConfigurator.configure();
+//        BasicConfigurator.configure();
     }
 
     private static final Log LOGGER = LogFactory.getLog(SocketServer2.class);
