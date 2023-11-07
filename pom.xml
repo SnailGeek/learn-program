@@ -26,6 +26,7 @@
         <module>lagou-distributed</module>
         <module>lagou-session</module>
         <module>lagou-socket</module>
+        <module>learn-netty</module>
     </modules>
 
     <properties>
