@@ -1,6 +1,7 @@
 package com.geek.design.netty.itcast.server.service;
 
-import cn.itcast.config.Config;
+
+import com.geek.design.netty.itcast.config.Config;
 
 import java.io.IOException;
 import java.io.InputStream;
