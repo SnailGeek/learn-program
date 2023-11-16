@@ -9,7 +9,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>learn-cloud-eureka</artifactId>
+    <artifactId>learn-cloud-eureka-server</artifactId>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
@@ -19,9 +19,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.snail</groupId>
-            <artifactId>learn-cloud-common</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
         </dependency>
     </dependencies>
 
