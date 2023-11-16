@@ -1,0 +1,16 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: learn-cloud-resume
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.75.130:3306/lagou?characterEncoding=utf8&useSSL=false
+    username: root
+    password: 123qwe!@#
+  jpa:
+    database: MySQL
+    show-sql: true
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
