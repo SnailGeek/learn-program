@@ -29,7 +29,8 @@ public class AutoDeliverController {
     @GetMapping("/checkState/discovery/{userId}")
     public Integer checkStateByDiscovery(@PathVariable Long userId) {
         List<ServiceInstance> instances = discoveryClient.getInstances("learn-cloud-resume");
-        ServiceInstance serviceInstance = instances.get(0);
+//        ServiceInstance serviceInstance = instances.get(0);
+        ServiceInstance serviceInstance = instances.stream().filter(instance -> "gray".equals(instance.getMetadata().get("tag"))).findFirst().get();
         String host = serviceInstance.getHost();
         int port = serviceInstance.getPort();
         String url = String.format("http://%s:%s/resume/openstate/%s", host, port, userId);
