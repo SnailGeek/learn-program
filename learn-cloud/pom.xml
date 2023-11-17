@@ -20,6 +20,7 @@
 
     <modules>
         <module>learn-cloud-eureka-server</module>
+        <module>learn-cloud-eureka-server-8762</module>
         <module>learn-cloud-common</module>
         <module>learn-cloud-autodeliver</module>
         <module>learn-cloud-resume</module>
