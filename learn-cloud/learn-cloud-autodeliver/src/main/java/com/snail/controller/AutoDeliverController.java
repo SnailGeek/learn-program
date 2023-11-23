@@ -26,6 +26,12 @@ public class AutoDeliverController {
     }
 
 
+    /**
+     * 测试服务发现
+     *
+     * @param userId
+     * @return
+     */
     @GetMapping("/checkState/discovery/{userId}")
     public Integer checkStateByDiscovery(@PathVariable Long userId) {
         List<ServiceInstance> instances = discoveryClient.getInstances("learn-cloud-resume");
@@ -34,6 +40,19 @@ public class AutoDeliverController {
         String host = serviceInstance.getHost();
         int port = serviceInstance.getPort();
         String url = String.format("http://%s:%s/resume/openstate/%s", host, port, userId);
+        return restTemplate.getForObject(url, Integer.class);
+    }
+
+
+    /**
+     * 测试负载均衡
+     *
+     * @param userId
+     * @return
+     */
+    @GetMapping("/checkState/loadbalance/{userId}")
+    public Integer checkStateBalance(@PathVariable Long userId) {
+        String url = String.format("http://learn-cloud-resume/resume/openstate/%s", userId);
         return restTemplate.getForObject(url, Integer.class);
     }
 }

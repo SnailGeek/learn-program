@@ -24,6 +24,7 @@
         <module>learn-cloud-common</module>
         <module>learn-cloud-autodeliver</module>
         <module>learn-cloud-resume</module>
+        <module>learn-cloud-resume-8081</module>
     </modules>
 
     <properties>
