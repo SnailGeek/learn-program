@@ -42,10 +42,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated();*/
 
         //3.3 登陆页面加载出来了，但是一些静态资源被拦截了
-        http.formLogin()
+        /*http.formLogin()
                 .loginPage("/toLoginPage")
                 .and().authorizeRequests()
                 .antMatchers("/toLoginPage").permitAll()
+                .anyRequest().authenticated();*/
+
+        // 4
+        http.formLogin()
+                .loginPage("/toLoginPage")
+                .loginProcessingUrl("/login") //表单提交路径
+                .usernameParameter("username") //修改自定义表单
+                .passwordParameter("password")
+                .successForwardUrl("/")// 登录成功后跳转页面
+                .and().authorizeRequests().antMatchers("/toLoginPage").permitAll()
                 .anyRequest().authenticated();
+
+        http.csrf().disable();
+
+        // 允许iframe加载页面
+        http.headers().frameOptions().sameOrigin();
     }
 }
