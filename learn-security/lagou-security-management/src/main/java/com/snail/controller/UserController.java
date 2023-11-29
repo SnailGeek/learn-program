@@ -3,6 +3,10 @@ package com.snail.controller;
 import com.snail.domain.User;
 import com.snail.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -112,4 +116,23 @@ public class UserController {
         return user;
     }
 
+    @GetMapping("/loginUser")
+    @ResponseBody
+    public UserDetails getLoginUser() {
+        UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return user;
+    }
+
+    @GetMapping("/loginUser1")
+    @ResponseBody
+    public UserDetails getLoginUser1(Authentication authentication) {
+        UserDetails user = (UserDetails) authentication.getPrincipal();
+        return user;
+    }
+
+    @GetMapping("/loginUser2")
+    @ResponseBody
+    public UserDetails getLoginUser2(@AuthenticationPrincipal UserDetails userDetails) {
+        return userDetails;
+    }
 }
