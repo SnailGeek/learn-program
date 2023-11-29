@@ -2,11 +2,16 @@ package com.snail.config;
 
 import com.snail.service.impl.MyUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+
+import javax.sql.DataSource;
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -60,6 +65,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("username") //修改自定义表单
                 .passwordParameter("password")
                 .successForwardUrl("/")// 登录成功后跳转页面
+                .and().rememberMe()
+                .tokenValiditySeconds(129600) // token失效时间，默认2周
+                .rememberMeParameter("remember-me") // 自定义表单参数，可以自定义，默认的就是remember-me
+                .tokenRepository(getPersistentTokenRepository()) // 设置token持久化
                 .and().authorizeRequests().antMatchers("/toLoginPage").permitAll()
                 .anyRequest().authenticated();
 
@@ -68,4 +77,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // 允许iframe加载页面
         http.headers().frameOptions().sameOrigin();
     }
+
+    @Autowired
+    private DataSource dataSource;
+
+    @Bean
+    public PersistentTokenRepository getPersistentTokenRepository() {
+        JdbcTokenRepositoryImpl jdbcTokenRepository = new JdbcTokenRepositoryImpl();
+        // 第一次启动时，会创建一个表
+        jdbcTokenRepository.setDataSource(dataSource);
+        jdbcTokenRepository.setCreateTableOnStartup(true);
+        return jdbcTokenRepository;
+    }
+
 }
