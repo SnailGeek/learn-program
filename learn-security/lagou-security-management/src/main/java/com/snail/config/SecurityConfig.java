@@ -1,5 +1,6 @@
 package com.snail.config;
 
+import com.snail.service.impl.MyAuthProcessService;
 import com.snail.service.impl.MyUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -17,6 +18,8 @@ import javax.sql.DataSource;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private MyUserDetailService myUserDetailService;
+    @Autowired
+    private MyAuthProcessService myAuthProcessService;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -64,7 +67,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/login") //表单提交路径
                 .usernameParameter("username") //修改自定义表单
                 .passwordParameter("password")
-                .successForwardUrl("/")// 登录成功后跳转页面
+                .successHandler(myAuthProcessService)
+                .failureHandler(myAuthProcessService)
+//                .successForwardUrl("/")// 登录成功后跳转页面
                 .and().rememberMe()
                 .tokenValiditySeconds(129600) // token失效时间，默认2周
                 .rememberMeParameter("remember-me") // 自定义表单参数，可以自定义，默认的就是remember-me
