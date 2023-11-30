@@ -86,7 +86,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         JdbcTokenRepositoryImpl jdbcTokenRepository = new JdbcTokenRepositoryImpl();
         // 第一次启动时，会创建一个表
         jdbcTokenRepository.setDataSource(dataSource);
-        jdbcTokenRepository.setCreateTableOnStartup(true);
+//        jdbcTokenRepository.setCreateTableOnStartup(true);
         return jdbcTokenRepository;
     }
 

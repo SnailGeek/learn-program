@@ -3,10 +3,12 @@ package com.snail.controller;
 import com.snail.domain.User;
 import com.snail.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.RememberMeAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -112,6 +114,10 @@ public class UserController {
     @GetMapping("/{id}")
     @ResponseBody
     public User getById(@PathVariable Integer id) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (RememberMeAuthenticationToken.class.isAssignableFrom(authentication.getClass())) {
+            throw new RememberMeAuthenticationException("信息认证来源于RememberMe,请重新登录");
+        }
         User user = userService.getById(id);
         return user;
     }
