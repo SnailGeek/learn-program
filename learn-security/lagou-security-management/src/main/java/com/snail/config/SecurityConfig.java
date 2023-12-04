@@ -86,6 +86,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().authorizeRequests().antMatchers("/toLoginPage").permitAll()
                 .anyRequest().authenticated();
 
+        // 登录失效后跳转的页面
+        http.sessionManagement()
+                .invalidSessionUrl("/toLoginPage")// 登录失效后跳转的页面
+                .maximumSessions(1) // 最大登录数，同一时间只有一个用户
+                .expiredUrl("/toLoginPage");// session过期后跳转路径
+
         http.csrf().disable();
 
         // 允许iframe加载页面
