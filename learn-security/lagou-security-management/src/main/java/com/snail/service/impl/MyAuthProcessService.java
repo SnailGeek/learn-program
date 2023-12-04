@@ -45,7 +45,7 @@ public class MyAuthProcessService implements AuthenticationSuccessHandler,
 //        redirectStrategy.sendRedirect(request, response, "/toLoginPage");
         Map<String, Object> map = new HashMap<>();
         map.put("code", HttpStatus.UNAUTHORIZED.value());
-        map.put("message", "登录失败");
+        map.put("message", exception.getMessage());
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().write(objectMapper.writeValueAsString(map));
     }

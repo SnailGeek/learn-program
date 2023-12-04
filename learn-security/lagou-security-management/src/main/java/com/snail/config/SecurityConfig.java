@@ -1,5 +1,6 @@
 package com.snail.config;
 
+import com.snail.filter.ValidateCodeFilter;
 import com.snail.service.impl.MyAuthProcessService;
 import com.snail.service.impl.MyUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
@@ -20,6 +22,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private MyUserDetailService myUserDetailService;
     @Autowired
     private MyAuthProcessService myAuthProcessService;
+    @Autowired
+    private ValidateCodeFilter validateCodeFilter;
+
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -29,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         //3.4 解决静态资源被拦截的问题
-        web.ignoring().antMatchers("/css/**", "/images/**", "/js/**,", "/favicon.ico");
+        web.ignoring().antMatchers("/css/**", "/images/**", "/js/**,", "/favicon.ico", "/code/**");
     }
 
     @Override
@@ -60,6 +65,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().authorizeRequests()
                 .antMatchers("/toLoginPage").permitAll()
                 .anyRequest().authenticated();*/
+
+        http.addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class);
 
         // 4
         http.formLogin()
