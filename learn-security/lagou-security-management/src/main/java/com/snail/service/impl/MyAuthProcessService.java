@@ -9,6 +9,7 @@ import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.ServletException;
@@ -20,7 +21,7 @@ import java.util.Map;
 
 @Service
 public class MyAuthProcessService implements AuthenticationSuccessHandler,
-        AuthenticationFailureHandler {
+        AuthenticationFailureHandler, LogoutSuccessHandler {
 
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
     @Autowired
@@ -47,5 +48,11 @@ public class MyAuthProcessService implements AuthenticationSuccessHandler,
         map.put("message", "登录失败");
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().write(objectMapper.writeValueAsString(map));
+    }
+
+    @Override
+    public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+        System.out.println("注销成功处理。。。");
+        redirectStrategy.sendRedirect(request, response, "/toLoginPage");
     }
 }

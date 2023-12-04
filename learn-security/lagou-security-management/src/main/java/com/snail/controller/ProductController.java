@@ -82,6 +82,7 @@ public class ProductController {
      */
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable Integer id) {
+
         productService.removeById(id);
         return "redirect:/product/findAll";
     }

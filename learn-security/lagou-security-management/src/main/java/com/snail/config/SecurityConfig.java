@@ -69,6 +69,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordParameter("password")
                 .successHandler(myAuthProcessService)
                 .failureHandler(myAuthProcessService)
+                .and().logout().logoutUrl("/logout")
+                .logoutSuccessHandler(myAuthProcessService)
 //                .successForwardUrl("/")// 登录成功后跳转页面
                 .and().rememberMe()
                 .tokenValiditySeconds(129600) // token失效时间，默认2周
