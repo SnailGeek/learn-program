@@ -13,6 +13,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import javax.sql.DataSource;
 
@@ -92,10 +95,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .maximumSessions(1) // 最大登录数，同一时间只有一个用户
                 .expiredUrl("/toLoginPage");// session过期后跳转路径
 
-        http.csrf().disable();
+        // 关闭跨站请求伪造保护，默认是开启的
+        // http.csrf().disable();
+        http.csrf().ignoringAntMatchers("/user/saveOrUpdate");
 
         // 允许iframe加载页面
         http.headers().frameOptions().sameOrigin();
+
+        http.cors().configurationSource(corsConfigurationSource());
     }
 
     @Autowired
@@ -110,4 +117,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return jdbcTokenRepository;
     }
 
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration corsConfiguration = new CorsConfiguration();
+        corsConfiguration.addAllowedOrigin("*");
+        corsConfiguration.addAllowedHeader("*");
+        corsConfiguration.addAllowedMethod("*");
+        corsConfiguration.setAllowCredentials(true);
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", corsConfiguration);
+        return source;
+    }
 }
