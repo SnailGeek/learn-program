@@ -1,6 +1,7 @@
 package com.snail.config;
 
 import com.snail.filter.ValidateCodeFilter;
+import com.snail.handler.MyAccessDenieHandler;
 import com.snail.service.impl.MyAuthProcessService;
 import com.snail.service.impl.MyUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private MyAuthProcessService myAuthProcessService;
     @Autowired
     private ValidateCodeFilter validateCodeFilter;
+    @Autowired
+    private MyAccessDenieHandler myAccessDenieHandler;
 
 
     @Override
@@ -70,6 +73,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated();*/
 
         http.addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class);
+
+        http.authorizeRequests().antMatchers("/user/**").hasRole("ADMIN");
+        // 可以限制ip和角色
+        http.authorizeRequests().antMatchers("/product/**")
+                .access("hasAnyRole('ADMIN,PRODUCT') and hasIpAddress('127.0.0.1')");
+
+        http.exceptionHandling().accessDeniedHandler(myAccessDenieHandler);
 
         // 4
         http.formLogin()

@@ -3,6 +3,7 @@ package com.snail.service.impl;
 import com.snail.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -25,7 +26,13 @@ public class MyUserDetailService implements UserDetailsService {
             throw new UsernameNotFoundException("用户名不存在");
         }
 
-        Collection<? extends GrantedAuthority> authorities = new ArrayList<>();
+        Collection<GrantedAuthority> authorities = new ArrayList<>();
+        if ("admin".equalsIgnoreCase(user.getUsername())) {
+            authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        } else {
+            authorities.add(new SimpleGrantedAuthority("ROLE_PRODUCT"));
+        }
+
 
         return new User(userName,
                 "{bcrypt}" + user.getPassword(), // {bcyrpt}表示加密方式，可以在PasswordEncoderFactories看到各种加密方式
