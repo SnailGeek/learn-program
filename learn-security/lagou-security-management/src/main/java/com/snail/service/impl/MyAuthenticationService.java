@@ -34,4 +34,11 @@ public class MyAuthenticationService {
             return false;
         }
     }
+
+    public boolean check(Authentication authentication, HttpServletRequest request, Integer id) {
+        if (id < 10) {
+            return true;
+        }
+        return false;
+    }
 }

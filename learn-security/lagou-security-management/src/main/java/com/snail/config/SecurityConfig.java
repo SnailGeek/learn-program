@@ -81,8 +81,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        http.authorizeRequests().antMatchers("/product/**")
 //                .access("hasAnyRole('ADMIN,PRODUCT') and hasIpAddress('127.0.0.1')");
 
-        http.authorizeRequests().antMatchers("/user/**")
-                .access("@myAuthenticationService.check(authentication,request)");
+        // 自定义bean限制url权限
+//        http.authorizeRequests().antMatchers("/user/**")
+//                .access("@myAuthenticationService.check(authentication,request)");
+
+        // 自定义bean-读取接口中的参数来做限制
+        http.authorizeRequests().antMatchers("/user/{id}")
+                .access("@myAuthenticationService.check(authentication,request,#id)");
 
         http.exceptionHandling().accessDeniedHandler(myAccessDenieHandler);
 
