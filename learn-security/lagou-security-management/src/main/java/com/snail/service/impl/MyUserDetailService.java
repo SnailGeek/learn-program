@@ -1,5 +1,7 @@
 package com.snail.service.impl;
 
+import com.snail.domain.Permission;
+import com.snail.service.PermissionService;
 import com.snail.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,11 +15,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Service
 public class MyUserDetailService implements UserDetailsService {
     @Autowired
     private UserService userService;
+    @Autowired
+    private PermissionService permissionService;
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
@@ -27,12 +32,18 @@ public class MyUserDetailService implements UserDetailsService {
         }
 
         Collection<GrantedAuthority> authorities = new ArrayList<>();
-        if ("admin".equalsIgnoreCase(user.getUsername())) {
-            authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-        } else {
-            authorities.add(new SimpleGrantedAuthority("ROLE_PRODUCT"));
-        }
+        // 直接添加权限
+        //if ("admin".equalsIgnoreCase(user.getUsername())) {
+        //    authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        //} else {
+        //    authorities.add(new SimpleGrantedAuthority("ROLE_PRODUCT"));
+        //}
 
+        // 从数据库中读取并添加权限项
+        List<Permission> permissions = permissionService.findByUserId(user.getId());
+        for (Permission permission : permissions) {
+            authorities.add(new SimpleGrantedAuthority(permission.getPermissionTag()));
+        }
 
         return new User(userName,
                 "{bcrypt}" + user.getPassword(), // {bcyrpt}表示加密方式，可以在PasswordEncoderFactories看到各种加密方式

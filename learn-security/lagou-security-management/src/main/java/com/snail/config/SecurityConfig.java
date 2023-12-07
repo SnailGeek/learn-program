@@ -1,7 +1,9 @@
 package com.snail.config;
 
+import com.snail.domain.Permission;
 import com.snail.filter.ValidateCodeFilter;
 import com.snail.handler.MyAccessDenieHandler;
+import com.snail.service.PermissionService;
 import com.snail.service.impl.MyAuthProcessService;
 import com.snail.service.impl.MyUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import javax.sql.DataSource;
+import java.util.List;
 
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -32,6 +35,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private ValidateCodeFilter validateCodeFilter;
     @Autowired
     private MyAccessDenieHandler myAccessDenieHandler;
+    @Autowired
+    private PermissionService permissionService;
 
 
     @Override
@@ -86,8 +91,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .access("@myAuthenticationService.check(authentication,request)");
 
         // 自定义bean-读取接口中的参数来做限制
-        http.authorizeRequests().antMatchers("/user/{id}")
-                .access("@myAuthenticationService.check(authentication,request,#id)");
+        /*http.authorizeRequests().antMatchers("/user/{id}")
+                .access("@myAuthenticationService.check(authentication,request,#id)");*/
+
+        // 从数据库中读取权限
+        List<Permission> permissions = permissionService.list();
+        for (Permission permission : permissions) {
+            http.authorizeRequests().antMatchers(permission.getPermissionUrl())
+                    .hasAuthority(permission.getPermissionTag());
+        }
 
         http.exceptionHandling().accessDeniedHandler(myAccessDenieHandler);
 
@@ -116,8 +128,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .expiredUrl("/toLoginPage");// session过期后跳转路径
 
         // 关闭跨站请求伪造保护，默认是开启的
-        // http.csrf().disable();
-        http.csrf().ignoringAntMatchers("/user/saveOrUpdate");
+        http.csrf().disable();
+        // 打开csrf保护之后，退出登录接口必须是一个post请求，否则会报错
+        //  http.csrf().ignoringAntMatchers("/user/saveOrUpdate");
 
         // 允许iframe加载页面
         http.headers().frameOptions().sameOrigin();

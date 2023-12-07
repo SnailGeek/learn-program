@@ -3,10 +3,6 @@ package com.snail.controller;
 import com.snail.domain.User;
 import com.snail.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PostAuthorize;
-import org.springframework.security.access.prepost.PostFilter;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.access.prepost.PreFilter;
 import org.springframework.security.authentication.RememberMeAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -34,7 +30,7 @@ public class UserController {
      * @return
      */
     @RequestMapping("/findAll")
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     public String findAll(Model model) {
         List<User> userList = userService.list();
         model.addAttribute("userList", userList);
@@ -48,7 +44,7 @@ public class UserController {
      */
     @RequestMapping("/findAllTOJson")
     @ResponseBody
-    @PostFilter("filterObject.id%2==0")
+//    @PostFilter("filterObject.id%2==0")
     public List<User> findAllTOJson() {
         List<User> userList = userService.list();
         return userList;
@@ -104,7 +100,7 @@ public class UserController {
      * @return
      */
     @GetMapping("/delByIds")
-    @PreFilter(filterTarget = "ids", value = "filterObject%2==0")
+//    @PreFilter(filterTarget = "ids", value = "filterObject%2==0")
     public String delByIds(@RequestParam(value = "id") List<Integer> ids) {
         for (Integer id : ids) {
             System.out.println(id);
@@ -120,7 +116,7 @@ public class UserController {
      */
     @GetMapping("/{id}")
     @ResponseBody
-    @PostAuthorize("returnObject.username==authentication.principal.username")
+//    @PostAuthorize("returnObject.username==authentication.principal.username")
     public User getById(@PathVariable Integer id) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (RememberMeAuthenticationToken.class.isAssignableFrom(authentication.getClass())) {
