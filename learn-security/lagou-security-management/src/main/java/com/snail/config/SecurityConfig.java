@@ -76,10 +76,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class);
 
-        http.authorizeRequests().antMatchers("/user/**").hasRole("ADMIN");
-        // 可以限制ip和角色
-        http.authorizeRequests().antMatchers("/product/**")
-                .access("hasAnyRole('ADMIN,PRODUCT') and hasIpAddress('127.0.0.1')");
+//        http.authorizeRequests().antMatchers("/user/**").hasRole("ADMIN");
+//        // 可以限制ip和角色
+//        http.authorizeRequests().antMatchers("/product/**")
+//                .access("hasAnyRole('ADMIN,PRODUCT') and hasIpAddress('127.0.0.1')");
+
+        http.authorizeRequests().antMatchers("/user/**")
+                .access("@myAuthenticationService.check(authentication,request)");
 
         http.exceptionHandling().accessDeniedHandler(myAccessDenieHandler);
 
