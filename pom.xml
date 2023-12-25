@@ -27,7 +27,8 @@
         <module>lagou-session</module>
         <module>lagou-socket</module>
         <module>learn-netty</module>
-<!--        <module>learn-security</module>-->
+        <module>learn-rpc</module>
+        <!--        <module>learn-security</module>-->
     </modules>
 
     <properties>
