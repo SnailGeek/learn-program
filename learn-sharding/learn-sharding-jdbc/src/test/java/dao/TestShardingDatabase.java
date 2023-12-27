@@ -21,7 +21,7 @@ public class TestShardingDatabase {
     public void testAdd() {
         for (int i = 1; i <= 20; i++) {
             Position position = new Position();
-            position.setId(i);
+//            position.setId(i);
             position.setName("lagou" + i);
             position.setSalary("100000000");
             position.setCity("beijing");
