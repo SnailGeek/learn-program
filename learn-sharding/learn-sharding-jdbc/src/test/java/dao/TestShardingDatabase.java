@@ -1,8 +1,10 @@
 package dao;
 
 import com.snail.learn.RunBoot;
+import com.snail.learn.entity.City;
 import com.snail.learn.entity.Position;
 import com.snail.learn.entity.PositionDetail;
+import com.snail.learn.repository.CitylRepository;
 import com.snail.learn.repository.PositionDetailRepository;
 import com.snail.learn.repository.PositionRepository;
 import org.junit.Test;
@@ -20,6 +22,8 @@ public class TestShardingDatabase {
     private PositionRepository positionRepository;
     @Resource
     private PositionDetailRepository positionDetailRepository;
+    @Resource
+    private CitylRepository citylRepository;
 
     @Test
     public void testAdd() {
@@ -54,5 +58,13 @@ public class TestShardingDatabase {
         Object object = positionRepository.findPositionById(947117061216141313L);
         Object[] postion = (Object[]) object;
         System.out.println(postion[0] + "  " + postion[1] + "  " + postion[2] + "  " + postion[3] + "  " + postion[4]);
+    }
+
+    @Test
+    public void boradCast() {
+        City city = new City();
+        city.setName("beijing");
+        city.setProvince("beijing");
+        citylRepository.save(city);
     }
 }
