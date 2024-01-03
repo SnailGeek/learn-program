@@ -1,18 +1,24 @@
 package dao;
 
 import com.snail.learn.RunBoot;
+import com.snail.learn.entity.BOrder;
 import com.snail.learn.entity.City;
 import com.snail.learn.entity.Position;
 import com.snail.learn.entity.PositionDetail;
+import com.snail.learn.repository.BOrderRepository;
 import com.snail.learn.repository.CitylRepository;
 import com.snail.learn.repository.PositionDetailRepository;
 import com.snail.learn.repository.PositionRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Repeat;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
+import javax.swing.border.Border;
+import java.util.Date;
+import java.util.Random;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = RunBoot.class)
@@ -66,5 +72,26 @@ public class TestShardingDatabase {
         city.setName("beijing");
         city.setProvince("beijing");
         citylRepository.save(city);
+    }
+
+    @Resource
+    private BOrderRepository bOrderRepository;
+
+    @Test
+    @Repeat(100)
+    public void testOrder() {
+        Random random = new Random();
+        int companyId = random.nextInt(10);
+        BOrder order = new BOrder();
+        order.setIsDel(false);
+        order.setCompanyId(companyId);
+        order.setPositionId(13212L);
+        order.setUserId(123);
+        order.setPublishUserId(134);
+        order.setResumeType(1);
+        order.setStatus("AUTO");
+        order.setCreateTime(new Date());
+        order.setOperateTime(new Date());
+        bOrderRepository.save(order);
     }
 }
