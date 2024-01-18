@@ -28,6 +28,7 @@
         <module>lagou-socket</module>
         <module>learn-netty</module>
         <module>learn-sharding</module>
+        <module>learn-zookeeper</module>
         <!--        <module>learn-rpc</module>-->
         <!--        <module>learn-security</module>-->
     </modules>
