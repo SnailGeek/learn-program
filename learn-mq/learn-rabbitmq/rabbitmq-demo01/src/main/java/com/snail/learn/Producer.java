@@ -13,7 +13,7 @@ public class Producer {
 
         try (Connection conn = factory.newConnection();
              Channel channel = conn.createChannel()) {
-
+            // 创建队列
             channel.queueDeclare(QUEUE_NAME, false,
                     false, false, null);
             String message = "Hello World!";
