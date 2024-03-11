@@ -5,10 +5,7 @@ import com.snail.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
@@ -42,12 +39,17 @@ public class ProductController {
      *
      * @return
      */
-    @RequestMapping("/update/{id}")
+    @RequestMapping(value = "/update/{id}",method = RequestMethod.GET)
     public String update(@PathVariable Integer id, Model model) {
         Product product = productService.getById(id);
         model.addAttribute("product", product);
         return "product_update";
     }
+
+
+
+    @GetMapping("/rest")
+    public String
 
     /**
      * 商品添加页面跳转

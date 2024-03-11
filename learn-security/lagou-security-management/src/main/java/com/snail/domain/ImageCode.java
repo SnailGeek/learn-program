@@ -3,14 +3,13 @@ package com.snail.domain;
 import lombok.Data;
 
 import java.awt.image.BufferedImage;
-import java.time.LocalDateTime;
+
 
 /**
  * 验证码
  */
 @Data
 public class ImageCode {
-
     /**
      * 验证码图片
      */

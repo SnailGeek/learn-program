@@ -30,6 +30,7 @@
         <module>learn-sharding</module>
         <module>learn-zookeeper</module>
         <module>learn-redis</module>
+        <module>learn-mq</module>
         <!--        <module>learn-rpc</module>-->
         <!--        <module>learn-security</module>-->
     </modules>
