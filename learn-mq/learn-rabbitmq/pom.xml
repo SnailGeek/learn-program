@@ -13,6 +13,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>rabbitmq-demo01</module>
+        <module>rabbitmq-spring-producer-xml</module>
+        <module>rabbitmq-spring-cosume-xml</module>
     </modules>
 
     <properties>
@@ -27,6 +29,12 @@
                 <groupId>com.rabbitmq</groupId>
                 <artifactId>amqp-client</artifactId>
                 <version>5.19.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.amqp</groupId>
+                <artifactId>spring-rabbit</artifactId>
+                <version>2.4.17</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
