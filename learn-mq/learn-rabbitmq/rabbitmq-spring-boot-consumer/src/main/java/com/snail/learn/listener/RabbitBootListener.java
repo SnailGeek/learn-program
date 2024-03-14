@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class RabbitBootListener {
 
-    @RabbitListener(queues = "queue.boot")
+    @RabbitListener(queues = "queue.ck")
     public void whenMessageCome(@Payload String message, @Header("hello") String value) {
         System.out.println(message);
         System.out.println(value);
