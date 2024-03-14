@@ -18,6 +18,7 @@
         <module>rabbitmq-spring-producer-anno</module>
         <module>rabbitmq-spring-cosume-anno</module>
         <module>rabbitmq-confirm</module>
+        <module>rabbitmq-persistent</module>
     </modules>
 
     <properties>
