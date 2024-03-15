@@ -25,7 +25,7 @@ public class RabbitmqConsumerAckApplication {
     public ApplicationRunner runner() {
         return args -> {
             Thread.sleep(5000);
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 100; i++) {
                 MessageProperties messageProperties = new MessageProperties();
                 messageProperties.setDeliveryTag(i);
 

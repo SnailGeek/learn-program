@@ -1,5 +1,6 @@
 package com.snail.learn.rabbitmqconsumerack.config;
 
+
 import org.springframework.amqp.core.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -7,6 +8,22 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class RabbitConfig {
+
+//    @Bean
+//    public ConnectionFactory connectionFactory() {
+//        return new CachingConnectionFactory();
+//    }
+
+//    @Bean
+//    public RabbitListenerContainerFactory rabbitListenerContainerFactory(ConnectionFactory connectionFactory) {
+//        SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
+//        factory.setConnectionFactory(connectionFactory);
+//        factory.setConcurrentConsumers(10);
+//        factory.setMaxConcurrentConsumers(20);
+//        return factory;
+//    }
+
+
     @Bean
     public Queue queue() {
         return new Queue("queue.ck", false,
