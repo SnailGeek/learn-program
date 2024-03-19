@@ -15,6 +15,7 @@
     <modules>
         <module>learn-rabbitmq</module>
         <module>learn-rabbitmq/rabbitmq-spring-cosume-anno</module>
+        <module>learn-kafka</module>
     </modules>
 
     <properties>
