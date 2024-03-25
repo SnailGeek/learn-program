@@ -24,6 +24,11 @@ public class Producer {
         // 设置自定义的分区器
         config.put(ProducerConfig.PARTITIONER_CLASS_CONFIG, MyPartitioner.class);
 
+        //设置拦截器
+        config.put(ProducerConfig.INTERCEPTOR_CLASSES_CONFIG, "com.snail.learn.interceptor.InterceptorOne," +
+                "com.snail.learn.interceptor.InterceptorTwo," +
+                "com.snail.learn.interceptor.InterceptorThree");
+
         User user = new User();
         user.setUserId(1001);
         user.setUsername("李四");
