@@ -25,9 +25,9 @@ public class Producer {
         config.put(ProducerConfig.PARTITIONER_CLASS_CONFIG, MyPartitioner.class);
 
         //设置拦截器
-        config.put(ProducerConfig.INTERCEPTOR_CLASSES_CONFIG, "com.snail.learn.interceptor.InterceptorOne," +
-                "com.snail.learn.interceptor.InterceptorTwo," +
-                "com.snail.learn.interceptor.InterceptorThree");
+        config.put(ProducerConfig.INTERCEPTOR_CLASSES_CONFIG, "com.snail.learn.interceptor.producer.InterceptorOne," +
+                "com.snail.learn.interceptor.producer.InterceptorTwo," +
+                "com.snail.learn.interceptor.producer.InterceptorThree");
 
         User user = new User();
         user.setUserId(1001);

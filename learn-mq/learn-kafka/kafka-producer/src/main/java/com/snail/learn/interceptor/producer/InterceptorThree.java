@@ -1,4 +1,4 @@
-package com.snail.learn.interceptor;
+package com.snail.learn.interceptor.producer;
 
 import org.apache.kafka.clients.producer.ProducerInterceptor;
 import org.apache.kafka.clients.producer.ProducerRecord;
