@@ -6,6 +6,7 @@ import org.apache.kafka.common.errors.SerializationException;
 import org.apache.kafka.common.serialization.Serializer;
 
 import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 public class UserSerializer implements Serializer<User> {
@@ -25,7 +26,7 @@ public class UserSerializer implements Serializer<User> {
             int length = 0;
             byte[] bytes = null;
             if (username != null) {
-                bytes = username.getBytes();
+                bytes = username.getBytes(StandardCharsets.UTF_8);
                 length = bytes.length;
             }
 
