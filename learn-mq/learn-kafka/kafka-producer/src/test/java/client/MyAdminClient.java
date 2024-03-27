@@ -76,7 +76,7 @@ public class MyAdminClient {
         Map<String, String> configs = new HashMap<>();
         configs.put("max.message.bytes", "1048576");
         configs.put("segment.bytes", "1048576000");
-        NewTopic newTopic = new NewTopic("adm_tp_01", 2, (short) 1);
+        NewTopic newTopic = new NewTopic("tp_demo_02", 3, (short) 1);
         newTopic.configs(configs);
 
         CreateTopicsResult topics = client.createTopics(List.of(newTopic));
@@ -89,7 +89,7 @@ public class MyAdminClient {
     public void testDeleteTopic() throws ExecutionException, InterruptedException {
         DeleteTopicsOptions deleteTopicsOptions = new DeleteTopicsOptions();
         deleteTopicsOptions.timeoutMs(500);
-        DeleteTopicsResult result = client.deleteTopics(List.of("adm_tp_01"), deleteTopicsOptions);
+        DeleteTopicsResult result = client.deleteTopics(List.of("tp_demo_02"), deleteTopicsOptions);
         result.all().get();
     }
 
