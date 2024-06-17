@@ -32,6 +32,7 @@
         <module>learn-redis</module>
         <module>learn-mq</module>
         <module>learn-concurrent</module>
+        <module>learn-db</module>
         <!--        <module>learn-rpc</module>-->
         <!--        <module>learn-security</module>-->
     </modules>
