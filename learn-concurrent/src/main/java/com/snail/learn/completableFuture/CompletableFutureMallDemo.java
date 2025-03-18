@@ -1,4 +1,4 @@
-package com.snail.learn.thread;
+package com.snail.learn.completableFuture;
 
 import lombok.Getter;
 

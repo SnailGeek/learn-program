@@ -1,4 +1,4 @@
-package com.snail.learn.thread;
+package com.snail.learn.completableFuture;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
