@@ -1,0 +1,30 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: learn-cloud-resume-nacos
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.98.171:3306/lagou?characterEncoding=utf8&useSSL=false
+    username: root
+    password: 123qwe!@#
+  jpa:
+    database: MySQL
+    show-sql: true
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://EurekaServerA:8761/eureka,http://EurekaServerB:8762/eureka
+#  instance:
+#    prefer-ip-address: true
+#    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}:@project.version@
+#    metadata-map:
+#      tag: gray

@@ -37,6 +37,7 @@
         <module>learn-mybatis</module>
         <module>learn-spring</module>
         <module>learn-spring/learn-spring-aop</module>
+        <module>learn-cloud/learn-cloud-resume-nacos</module>
         <!--        <module>learn-rpc</module>-->
         <!--        <module>learn-security</module>-->
     </modules>
