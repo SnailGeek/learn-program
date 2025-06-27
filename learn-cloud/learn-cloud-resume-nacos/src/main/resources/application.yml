@@ -9,7 +9,8 @@ spring:
         server-addr: 127.0.0.1:8848
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.98.171:3306/lagou?characterEncoding=utf8&useSSL=false
+    url: jdbc:mysql://192.168.75.130:3306/lagou?characterEncoding=utf8&useSSL=false
+#    url: jdbc:mysql://192.168.98.171:3306/lagou?characterEncoding=utf8&useSSL=false
     username: root
     password: 123qwe!@#
   jpa:
