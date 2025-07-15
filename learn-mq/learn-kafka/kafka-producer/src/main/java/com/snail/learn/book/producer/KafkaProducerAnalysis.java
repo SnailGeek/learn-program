@@ -1,4 +1,4 @@
-package com.snail.learn.book;
+package com.snail.learn.book.producer;
 
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;

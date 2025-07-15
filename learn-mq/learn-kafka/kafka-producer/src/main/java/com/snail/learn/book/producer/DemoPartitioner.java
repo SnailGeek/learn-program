@@ -1,4 +1,4 @@
-package com.snail.learn.book.partitioner;
+package com.snail.learn.book.producer;
 
 import org.apache.kafka.clients.producer.Partitioner;
 import org.apache.kafka.common.Cluster;
